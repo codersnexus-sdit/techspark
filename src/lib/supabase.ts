@@ -1,6 +1,2 @@
-import { createClientComponentClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-
-export const createClient = () => createClientComponentClient()
-
-export const createServerClient = () => createServerComponentClient({ cookies })
+// Client-only barrel to avoid pulling server-only code into client bundles
+export { createClient } from './supabase-client'

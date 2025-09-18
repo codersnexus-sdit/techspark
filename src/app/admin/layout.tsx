@@ -1,52 +1,45 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createClient } from '@/lib/supabase'
-import type { User } from '@supabase/supabase-js'
+import { useRouter, usePathname } from 'next/navigation'
+import { isAdminAuthenticated } from '@/lib/adminAuth'
 
 export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
   const router = useRouter()
-  const supabase = createClient()
+  const pathname = usePathname()
 
   useEffect(() => {
-    const checkAuth = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
-      
-      if (!user) {
+    const checkAuth = () => {
+      // Skip auth check for login page
+      if (pathname === '/admin/login') {
+        setLoading(false)
+        return
+      }
+
+      // Check if admin is authenticated
+      if (!isAdminAuthenticated()) {
         router.push('/admin/login')
         return
       }
 
-      // Check if user is admin
-      const { data: adminData } = await supabase
-        .from('admin_users')
-        .select('email')
-        .eq('email', user.email)
-        .single()
-
-      if (!adminData) {
-        router.push('/admin/login')
-        return
-      }
-
-      setUser(user)
       setLoading(false)
     }
 
     checkAuth()
-  }, [router, supabase])
+  }, [router, pathname])
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading admin panel...</p>
+        </div>
       </div>
     )
   }

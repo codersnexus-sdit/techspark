@@ -11,12 +11,13 @@ export default function Navbar() {
             </Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Link href="/register" className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+            <Link 
+              href="/register" 
+              className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium"
+            >
               Register Now
             </Link>
-            <Link href="/admin" className="text-gray-700 hover:text-gray-900">
-              Admin
-            </Link>
+            {/* Admin link completely removed */}
           </div>
         </div>
       </div>

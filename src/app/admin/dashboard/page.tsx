@@ -56,13 +56,21 @@ export default function AdminDashboard() {
     }
   }
 
+  // Updated handleLogout function to clear session storage
   const handleLogout = async () => {
     try {
+      // Clear admin session from sessionStorage
+      sessionStorage.removeItem('adminAuthenticated')
+      sessionStorage.removeItem('adminEmail')
+      
+      // Sign out from Supabase
       await supabase.auth.signOut()
+      
       toast.success('Logged out successfully')
       router.push('/admin/login')
     } catch (error) {
       toast.error('Error logging out')
+      console.error('Logout error:', error)
     }
   }
 
@@ -89,7 +97,7 @@ export default function AdminDashboard() {
       const wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, ws, 'Participants')
       
-      // Set column widths
+      // Set column widths for better formatting
       const colWidths = [
         { wch: 15 }, // First Name
         { wch: 15 }, // Last Name
@@ -140,14 +148,20 @@ export default function AdminDashboard() {
               .header {
                 text-align: center;
                 margin-bottom: 30px;
+                border-bottom: 2px solid #333;
+                padding-bottom: 15px;
               }
               h1 { 
                 color: #333;
                 margin-bottom: 10px;
+                font-size: 24px;
               }
               .info {
                 margin-bottom: 20px;
                 color: #666;
+                background-color: #f5f5f5;
+                padding: 10px;
+                border-radius: 5px;
               }
               table { 
                 width: 100%; 
@@ -169,20 +183,27 @@ export default function AdminDashboard() {
               tr:nth-child(even) {
                 background-color: #f9f9f9;
               }
+              tr:hover {
+                background-color: #f0f8ff;
+              }
               .footer {
                 margin-top: 30px;
                 text-align: center;
                 color: #666;
                 font-size: 10px;
+                border-top: 1px solid #ddd;
+                padding-top: 15px;
               }
             </style>
           </head>
           <body>
             <div class="header">
               <h1>Event Participants Report</h1>
+              <p>TechEvent 2024 Registration Data</p>
             </div>
             <div class="info">
               <p><strong>Total Participants:</strong> ${participants.length}</p>
+              <p><strong>Unique Colleges:</strong> ${new Set(participants.map(p => p.college)).size}</p>
               <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}</p>
             </div>
             <table>
@@ -198,13 +219,13 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody>
-                ${participants.map(p => `
+                ${participants.map((p, index) => `
                   <tr>
                     <td>${p.first_name} ${p.last_name}</td>
                     <td>${p.email}</td>
                     <td>${p.phone}</td>
                     <td>${p.college}</td>
-                    <td>${p.year}</td>
+                    <td>Year ${p.year}</td>
                     <td>${p.department}</td>
                     <td>${p.usn}</td>
                   </tr>
@@ -212,7 +233,8 @@ export default function AdminDashboard() {
               </tbody>
             </table>
             <div class="footer">
-              <p>This report was generated automatically from the event registration system.</p>
+              <p>This report was generated automatically from the TechEvent 2024 registration system.</p>
+              <p>For any queries, contact the event organizers.</p>
             </div>
           </body>
         </html>
@@ -270,12 +292,17 @@ export default function AdminDashboard() {
               <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
               <p className="text-gray-600 mt-1">Manage event registrations</p>
             </div>
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition-colors duration-200 font-medium"
-            >
-              Logout
-            </button>
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-600">
+                Welcome, Admin
+              </div>
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition-colors duration-200 font-medium"
+              >
+                Logout
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -288,6 +315,7 @@ export default function AdminDashboard() {
               Total Participants
             </h3>
             <p className="text-3xl font-bold text-blue-600 mt-2">{participants.length}</p>
+            <p className="text-xs text-gray-500 mt-1">All time registrations</p>
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-sm border">
@@ -295,6 +323,7 @@ export default function AdminDashboard() {
               Today's Registrations
             </h3>
             <p className="text-3xl font-bold text-green-600 mt-2">{todayRegistrations}</p>
+            <p className="text-xs text-gray-500 mt-1">New registrations today</p>
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-sm border">
@@ -304,6 +333,7 @@ export default function AdminDashboard() {
             <p className="text-3xl font-bold text-purple-600 mt-2">
               {new Set(participants.map(p => p.college)).size}
             </p>
+            <p className="text-xs text-gray-500 mt-1">Different institutions</p>
           </div>
           
           <div className="bg-white p-6 rounded-lg shadow-sm border">
@@ -315,15 +345,17 @@ export default function AdminDashboard() {
                 onClick={exportToExcel}
                 disabled={participants.length === 0}
                 className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                title="Download Excel file"
               >
-                Excel
+                📊 Excel
               </button>
               <button
                 onClick={exportToPDF}
                 disabled={participants.length === 0}
                 className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                title="Print/Save as PDF"
               >
-                PDF
+                📄 PDF
               </button>
             </div>
           </div>
@@ -337,6 +369,7 @@ export default function AdminDashboard() {
                 <h2 className="text-xl font-semibold text-gray-900">Registered Participants</h2>
                 <p className="text-sm text-gray-600 mt-1">
                   {filteredParticipants.length} of {participants.length} participants
+                  {searchTerm && ` matching "${searchTerm}"`}
                 </p>
               </div>
               <div className="flex items-center space-x-2">
@@ -350,9 +383,10 @@ export default function AdminDashboard() {
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm('')}
-                    className="px-3 py-2 text-gray-400 hover:text-gray-600"
+                    className="px-3 py-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100"
+                    title="Clear search"
                   >
-                    Clear
+                    ✕
                   </button>
                 )}
               </div>
@@ -363,6 +397,9 @@ export default function AdminDashboard() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    #
+                  </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Name
                   </th>
@@ -387,8 +424,11 @@ export default function AdminDashboard() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {filteredParticipants.map((participant) => (
-                  <tr key={participant.id} className="hover:bg-gray-50">
+                {filteredParticipants.map((participant, index) => (
+                  <tr key={participant.id} className="hover:bg-gray-50 transition-colors duration-150">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {index + 1}
+                    </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">
                         {participant.first_name} {participant.last_name}
@@ -414,14 +454,19 @@ export default function AdminDashboard() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 font-mono">{participant.usn}</div>
+                      <div className="text-sm text-gray-900 font-mono bg-gray-100 px-2 py-1 rounded">
+                        {participant.usn}
+                      </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm text-gray-900">
                         {new Date(participant.created_at!).toLocaleDateString()}
                       </div>
                       <div className="text-xs text-gray-500">
-                        {new Date(participant.created_at!).toLocaleTimeString()}
+                        {new Date(participant.created_at!).toLocaleTimeString([], { 
+                          hour: '2-digit', 
+                          minute: '2-digit' 
+                        })}
                       </div>
                     </td>
                   </tr>
@@ -432,20 +477,26 @@ export default function AdminDashboard() {
 
           {filteredParticipants.length === 0 && (
             <div className="text-center py-12">
-              <div className="text-gray-400 mb-2">
-                <svg className="mx-auto h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <div className="text-gray-400 mb-4">
+                <svg className="mx-auto h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <p className="text-gray-500 text-lg">
-                {searchTerm ? 'No participants found matching your search' : 'No participants registered yet'}
+              <h3 className="text-lg font-medium text-gray-900 mb-2">
+                {searchTerm ? 'No participants found' : 'No participants registered yet'}
+              </h3>
+              <p className="text-gray-500">
+                {searchTerm 
+                  ? 'Try adjusting your search terms or clear the search to see all participants.' 
+                  : 'Participants will appear here once they start registering for the event.'
+                }
               </p>
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="mt-2 text-blue-600 hover:text-blue-800 text-sm"
+                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
                 >
-                  Clear search to see all participants
+                  Clear search
                 </button>
               )}
             </div>
@@ -454,9 +505,14 @@ export default function AdminDashboard() {
           {/* Pagination info */}
           {filteredParticipants.length > 0 && (
             <div className="px-6 py-3 border-t border-gray-200 bg-gray-50">
-              <div className="text-sm text-gray-700">
-                Showing {filteredParticipants.length} participant{filteredParticipants.length !== 1 ? 's' : ''}
-                {searchTerm && ` matching "${searchTerm}"`}
+              <div className="flex justify-between items-center text-sm text-gray-700">
+                <div>
+                  Showing {filteredParticipants.length} participant{filteredParticipants.length !== 1 ? 's' : ''}
+                  {searchTerm && ` matching "${searchTerm}"`}
+                </div>
+                <div className="text-gray-500">
+                  Last updated: {new Date().toLocaleTimeString()}
+                </div>
               </div>
             </div>
           )}

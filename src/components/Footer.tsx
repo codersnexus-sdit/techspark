@@ -25,7 +25,7 @@ const Footer = () => {
                   <div className="logo">
                     <Link href="/" className="inline-block">
                       <img 
-                        src="/logo/nexus.svg" 
+                        src="/assets/logo/nexus.svg" 
                         alt="Coders Nexus SDIT Logo" 
                         className="logo-light w-auto h-70"
                       />

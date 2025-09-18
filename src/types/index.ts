@@ -21,3 +21,16 @@ export interface Participant {
     department: string
     usn: string
   }
+  
+  export interface AdminCredentials {
+    email: string
+    password: string
+  }
+  
+  export interface ParticipantStats {
+    total_participants: number
+    unique_colleges: number
+    unique_departments: number
+    today_registrations: number
+    week_registrations: number
+  }

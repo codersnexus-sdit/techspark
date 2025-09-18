@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection'
 import Footer from '@/components/Footer'
 import Map from '@/components/Map'
 import Timeline from '@/components/Timeline'
+import AboutSection from '@/components/AboutSection'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <main className="flex-grow">
         <HeroSection />
       </main>
+      <AboutSection /> 
       <Timeline />
       <Map />
       <Footer />

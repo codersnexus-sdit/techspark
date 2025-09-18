@@ -28,7 +28,7 @@ export default function AboutSection() {
       >
         {/* Subheading */}
         <p className="text-sm md:text-base text-[#8b5cf6] font-medium mb-3">
-          Coders Nexus
+          Technical Event
         </p>
 
         {/* Heading */}
@@ -45,7 +45,17 @@ export default function AboutSection() {
 
         {/* Paragraph */}
         <p className="text-base md:text-lg text-gray-300 leading-relaxed mb-10 max-w-7xl">
-          Join us for an exciting 24-hours offline hackathon at Srinivas University Institute of Engineering and Technology (SUIET), organized by the Webflow Community, from October 19–21, 2024. The event kicks off with two workshops on October 19, covering essential tech stacks, followed by a hack session starting at 10 AM on October 20. Participants will work on company-funded or open-themed problem statements, progressing through design, development, and final presentations. Judges will evaluate projects based on innovation, functionality, presentation skills, business viability, and more. With themes suitable for all skill levels, this is a fantastic opportunity for creativity and collaboration!
+          The{" "}
+          <span className="text-[#8b5cf6] font-semibold">Technical Event</span>{" "}
+          will be held on <span className="font-semibold">29th September</span>{" "}
+          and is open exclusively for{" "}
+          <span className="font-semibold">individual participants</span>. The
+          competition will begin with an aptitude and coding basics round,
+          followed by a debugging challenge, and will conclude with a final
+          coding showdown for the top performers. This structured format ensures
+          a fair and engaging experience, providing every participant the chance
+          to test their knowledge, showcase their skills, and compete for top
+          honors in a competitive yet collaborative environment.
         </p>
 
         {/* Buttons */}
@@ -54,12 +64,12 @@ export default function AboutSection() {
             href="#"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#9333ea] text-white font-medium shadow-md hover:opacity-90 transition"
           >
-            Download Hackathon Rulebook
+            Download Event Schedule
             <ArrowRight className="ml-2 w-5 h-5" />
           </a>
 
           <a
-            href="register"
+            href="#"
             className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-[#a855f7] text-white font-medium hover:bg-[#a855f7]/10 transition"
           >
             Register Now

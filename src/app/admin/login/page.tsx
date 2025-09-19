@@ -41,11 +41,11 @@ export default function AdminLogin() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
       
-      <div className="relative z-10 max-w-md w-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-700/50 shadow-2xl p-8">
+      <div className="relative z-10 max-w-md w-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-700/50 shadow-2xl p-8 mx-4">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <img 
-              src="/logo/nexus.svg" 
+              src="/assets/logo/nexus1.png" 
               alt="Coders Nexus Logo" 
               className="w-10 h-10 object-contain"
             />

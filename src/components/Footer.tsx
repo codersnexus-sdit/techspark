@@ -15,36 +15,35 @@ const Footer = () => {
     <div className="bg-black xl:px-10 md:px-4 lg:px-20 font-jetbrainsMono">
       <footer className="body-font tracking-wider">
         {/* Footer Top Section */}
-        <div className="footer-top py-8">
-          <div className="container mx-auto">
-            <div className="flex justify-between items-start flex-wrap">
+        <div className="footer-top py-12 md:py-16">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 items-center">
               
               {/* Logo and Description Section */}
-              <div className="lg:w-4/12 md:w-6/12 sm:w-full w-full mb-8 md:mb-0 relative">
-                <div className="rainbow-footer-widget relative">
-                  <div className="logo">
+              <div className="w-full sm:col-span-2 md:col-span-1 flex flex-col justify-center">
+                <div className="rainbow-footer-widget flex flex-col items-center md:items-start">
+                  <div className="logo w-full flex justify-center md:justify-start">
                     <Link href="/" className="inline-block">
                       <img 
-                        src="/assets/logo/nexus.svg" 
+                        src="/assets/logo/coders-nexus1.svg" 
                         alt="Coders Nexus SDIT Logo" 
-                        className="logo-light w-auto h-70"
+                        className="logo-light w-full max-w-[180px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[420px] h-auto md:mx-0 mx-auto"
                       />
                     </Link>
                   </div>
-                  <p className="text-gray-300 text-base leading-relaxed absolute bottom-4 left-4 max-w-xs">
-                    Coders Nexus SDIT -<br /> 
-                    Open Source Community
+                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mt-4 max-w-md text-center md:text-left whitespace-normal md:whitespace-nowrap">
+                    
                   </p>
                 </div>
               </div>
 
               {/* Social Media Section */}
-              <div className="lg:w-2/12 md:w-6/12 sm:w-6/12 w-full mb-8 md:mb-0">
-                <div className="rainbow-footer-widget">
+              <div className="w-full">
+                <div className="rainbow-footer-widget text-center md:text-left">
                   <div className="widget-menu-bottom">
-                    <h4 className="text-white text-lg font-semibold mb-6 title">Social Media</h4>
+                    <h4 className="text-white text-lg font-semibold mb-4 md:mb-6 title">Social Media</h4>
                     <div className="inner">
-                      <ul className="footer-link link-hover space-y-3">
+                      <ul className="footer-link link-hover space-y-2 md:space-y-3">
                         <li>
                           <Link 
                             href={instagramLink} 
@@ -97,14 +96,14 @@ const Footer = () => {
               </div>
 
               {/* Contact Section */}
-              <div className="lg:w-3/12 md:w-6/12 sm:w-6/12 w-full">
-                <div className="rainbow-footer-widget">
+              <div className="w-full">
+                <div className="rainbow-footer-widget text-center md:text-left">
                   <div className="widget-menu-top">
-                    <h4 className="text-white text-lg font-semibold mb-6 title">Contact</h4>
+                    <h4 className="text-white text-lg font-semibold mb-4 md:mb-6 title">Contact</h4>
                     <div className="inner">
-                      <ul className="footer-link contact-link space-y-4">
-                        <li className="flex items-start">
-                          <i className="contact-icon fa-regular fa-location-dot mt-1 mr-3 text-[#9929EA]"></i>
+                      <ul className="footer-link contact-link space-y-3 md:space-y-4">
+                        <li className="flex items-start justify-center md:justify-start text-center md:text-left">
+                          <i className="hidden md:inline-block contact-icon fa-regular fa-location-dot mt-1 mr-0 md:mr-3 text-[#9929EA]"></i>
                           <Link 
                             href="https://maps.app.goo.gl/YourMapLink" 
                             target="_blank"
@@ -113,8 +112,8 @@ const Footer = () => {
                             Shree Devi Institute Of Technology, Airport Rd, Kenjar, Mangaluru, Karnataka - 574142 IN
                           </Link>
                         </li>
-                        <li className="flex items-start">
-                          <i className="contact-icon fa-sharp fa-regular fa-envelope mt-1 mr-3 text-[#9929EA]"></i>
+                        <li className="flex items-start justify-center md:justify-start text-center md:text-left">
+                          <i className="hidden md:inline-block contact-icon fa-sharp fa-regular fa-envelope mt-1 mr-0 md:mr-3 text-[#9929EA]"></i>
                           <Link 
                             href="mailto:codersnexus.osc@gmail.com"
                             target="_blank"
@@ -123,8 +122,8 @@ const Footer = () => {
                             codersnexus.osc@gmail.com
                           </Link>
                         </li>
-                        <li className="flex items-start">
-                          <i className="contact-icon fa-regular fa-phone mt-1 mr-3 text-[#9929EA]"></i>
+                        <li className="flex items-start justify-center md:justify-start text-center md:text-left">
+                          <i className="hidden md:inline-block contact-icon fa-regular fa-phone mt-1 mr-0 md:mr-3 text-[#9929EA]"></i>
                           <Link 
                             href="tel:+916362161570"
                             className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
@@ -142,7 +141,7 @@ const Footer = () => {
         </div>
 
         {/* Footer Bottom */}
-        <div className="border-t border-gray-800 pt-6">
+        <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="text-white">
             <p className="pb-5 px-5 text-center text-gray-400">
               Coders Nexus © {new Date().getFullYear()}

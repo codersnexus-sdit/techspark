@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 
@@ -63,34 +63,46 @@ const TimelineSection = () => {
     }
   ];
 
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  // Generate deterministic particle positions only on client to avoid hydration mismatch
+  const particles = useMemo(() => {
+    if (!isClient) return [] as { x: number; y: number; tx: number; ty: number; d: number }[];
+    const width = Math.max(0, window.innerWidth);
+    const height = Math.max(0, window.innerHeight);
+    return Array.from({ length: 8 }, () => {
+      const x = Math.random() * width;
+      const y = Math.random() * height;
+      const tx = Math.random() * width;
+      const ty = Math.random() * height;
+      const d = 25 + Math.random() * 15;
+      return { x, y, tx, ty, d };
+    });
+  }, [isClient]);
+
   return (
-    <section className="relative min-h-screen bg-black text-white px-6 sm:px-12 md:px-20 lg:px-32 py-20">
+    <section className="relative min-h-screen bg-black text-white px-4 sm:px-6 md:px-20 lg:px-32 py-16 md:py-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-black" />
       
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 opacity-10">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-purple-500 rounded-full"
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-            }}
-            animate={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-            }}
-            transition={{
-              duration: 25 + Math.random() * 15,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "linear"
-            }}
-          />
-        ))}
-      </div>
+      {/* Animated Background Particles - client only, hidden on small screens */}
+      {isClient && (
+        <div className="pointer-events-none absolute inset-0 opacity-10 hidden md:block">
+          {particles.map((p, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-500 rounded-full"
+              initial={{ x: p.x, y: p.y }}
+              animate={{ x: p.tx, y: p.ty }}
+              transition={{ duration: p.d, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}
@@ -115,7 +127,7 @@ const TimelineSection = () => {
         {/* Timeline */}
         <div className="relative">
           {/* Central Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 via-purple-400 to-transparent"></div>
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 via-purple-400 to-transparent"></div>
           
           <div className="space-y-12">
             {timelineEvents.map((event, index) => {
@@ -125,15 +137,15 @@ const TimelineSection = () => {
                 <motion.div
                   key={index}
                   className="relative"
-                  initial={{ opacity: 0, x: isLeft ? -100 : 100 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 24, x: 0 }}
+                  whileInView={{ opacity: 1, y: 0, x: 0 }}
                   transition={{ duration: 0.8, delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className={`flex items-center ${isLeft ? 'flex-row' : 'flex-row-reverse'}`}>
+                  <div className={`md:flex items-center ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                     {/* Content Card */}
                     <motion.div 
-                      className={`w-5/12 ${isLeft ? 'pr-8 text-right' : 'pl-8 text-left'}`}
+                      className={`w-full md:w-5/12 ${isLeft ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'} text-left`}
                       whileHover={{ scale: 1.02 }}
                       transition={{ type: "spring", stiffness: 300 }}
                     >
@@ -150,7 +162,7 @@ const TimelineSection = () => {
                     </motion.div>
 
                     {/* Timeline Node */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 z-10">
+                    <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 z-10">
                       <motion.div 
                         className={`w-4 h-4 rounded-full ${
                           event.status === 'completed' 
@@ -174,7 +186,7 @@ const TimelineSection = () => {
                     </div>
 
                     {/* Spacer for opposite side */}
-                    <div className="w-5/12"></div>
+                    <div className="hidden md:block md:w-5/12"></div>
                   </div>
                 </motion.div>
               );

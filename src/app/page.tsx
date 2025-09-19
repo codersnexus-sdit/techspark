@@ -17,23 +17,23 @@ export default function Home() {
         </section>
       </main>
       
-      {/* About Section with increased spacing */}
-      <section id="about" className="py-24 md:py-32 lg:py-40">
+      {/* About Section with reduced spacing */}
+      <section id="about" className="py-16 md:py-20 lg:py-24">
         <AboutSection /> 
       </section>
       
-      {/* Timeline Section with increased spacing */}
-      <section id="timeline" className="py-24 md:py-32 lg:py-40">
+      {/* Timeline Section with reduced spacing */}
+      <section id="timeline" className="py-16 md:py-20 lg:py-24">
         <Timeline />
       </section>
       
-      {/* Map Section with increased spacing */}
-      <section id="map" className="py-24 md:py-32 lg:py-40">
+      {/* Map Section with reduced spacing */}
+      <section id="map" className="py-16 md:py-20 lg:py-24">
         <Map />
       </section>
       
       {/* Contact/Footer Section */}
-      <section id="contact" className="mt-24 md:mt-32 lg:mt-40">
+      <section id="contact" className="mt-16 md:mt-20 lg:mt-24">
         <Footer />
       </section>
     </div>

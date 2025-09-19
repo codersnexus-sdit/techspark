@@ -273,32 +273,49 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading dashboard...</p>
+      <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
+        {/* Background Effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-purple-600/20"></div>
+        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        
+        <div className="relative z-10 text-center">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-500 mx-auto"></div>
+          <p className="mt-4 text-gray-300">Loading dashboard...</p>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/10 via-black to-purple-600/10"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="relative z-10 bg-gray-900/80 backdrop-blur-md border-b border-gray-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-              <p className="text-gray-600 mt-1">Manage event registrations</p>
+            <div className="flex items-center space-x-4">
+              <img 
+                src="/logo/nexus.svg" 
+                alt="Coders Nexus Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              <div>
+                <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
+                <p className="text-gray-300 mt-1">Manage event registrations</p>
+              </div>
             </div>
             <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-300">
                 Welcome, Admin
               </div>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white px-6 py-2 rounded-md hover:bg-red-700 transition-colors duration-200 font-medium"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-medium shadow-lg hover:shadow-red-500/25"
               >
                 Logout
               </button>
@@ -307,44 +324,44 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+          <div className="bg-gray-900/80 backdrop-blur-md p-6 rounded-xl border border-gray-700/50 shadow-lg">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Total Participants
             </h3>
-            <p className="text-3xl font-bold text-blue-600 mt-2">{participants.length}</p>
+            <p className="text-3xl font-bold text-blue-400 mt-2">{participants.length}</p>
             <p className="text-xs text-gray-500 mt-1">All time registrations</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+          <div className="bg-gray-900/80 backdrop-blur-md p-6 rounded-xl border border-gray-700/50 shadow-lg">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Today's Registrations
             </h3>
-            <p className="text-3xl font-bold text-green-600 mt-2">{todayRegistrations}</p>
+            <p className="text-3xl font-bold text-green-400 mt-2">{todayRegistrations}</p>
             <p className="text-xs text-gray-500 mt-1">New registrations today</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+          <div className="bg-gray-900/80 backdrop-blur-md p-6 rounded-xl border border-gray-700/50 shadow-lg">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Unique Colleges
             </h3>
-            <p className="text-3xl font-bold text-purple-600 mt-2">
+            <p className="text-3xl font-bold text-purple-400 mt-2">
               {new Set(participants.map(p => p.college)).size}
             </p>
             <p className="text-xs text-gray-500 mt-1">Different institutions</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wide">
+          <div className="bg-gray-900/80 backdrop-blur-md p-6 rounded-xl border border-gray-700/50 shadow-lg">
+            <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Export Options
             </h3>
             <div className="flex space-x-2 mt-3">
               <button
                 onClick={exportToExcel}
                 disabled={participants.length === 0}
-                className="bg-green-600 text-white px-3 py-1 rounded text-sm hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                className="bg-gradient-to-r from-green-600 to-green-700 text-white px-3 py-1 rounded-lg text-sm hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-green-500/25"
                 title="Download Excel file"
               >
                 📊 Excel
@@ -352,7 +369,7 @@ export default function AdminDashboard() {
               <button
                 onClick={exportToPDF}
                 disabled={participants.length === 0}
-                className="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1 rounded-lg text-sm hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-red-500/25"
                 title="Print/Save as PDF"
               >
                 📄 PDF
@@ -362,12 +379,12 @@ export default function AdminDashboard() {
         </div>
 
         {/* Search and Table */}
-        <div className="bg-white rounded-lg shadow-sm border">
-          <div className="p-6 border-b border-gray-200">
+        <div className="bg-gray-900/80 backdrop-blur-md rounded-xl border border-gray-700/50 shadow-lg">
+          <div className="p-6 border-b border-gray-700/50">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-gray-900">Registered Participants</h2>
-                <p className="text-sm text-gray-600 mt-1">
+                <h2 className="text-xl font-semibold text-white">Registered Participants</h2>
+                <p className="text-sm text-gray-300 mt-1">
                   {filteredParticipants.length} of {participants.length} participants
                   {searchTerm && ` matching "${searchTerm}"`}
                 </p>
@@ -378,12 +395,12 @@ export default function AdminDashboard() {
                   placeholder="Search by name, email, college, or USN..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-full sm:w-80"
+                  className="px-4 py-2 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full sm:w-80 transition-all duration-200"
                 />
                 {searchTerm && (
                   <button
                     onClick={() => setSearchTerm('')}
-                    className="px-3 py-2 text-gray-400 hover:text-gray-600 rounded-md hover:bg-gray-100"
+                    className="px-3 py-2 text-gray-400 hover:text-gray-200 rounded-lg hover:bg-gray-700/50 transition-all duration-200"
                     title="Clear search"
                   >
                     ✕
@@ -394,59 +411,59 @@ export default function AdminDashboard() {
           </div>
 
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+            <table className="min-w-full divide-y divide-gray-700/50">
+              <thead className="bg-gray-800/50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     #
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Name
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Email
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Phone
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     College
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Year/Dept
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     USN
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
                     Registered
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-gray-900/50 divide-y divide-gray-700/50">
                 {filteredParticipants.map((participant, index) => (
-                  <tr key={participant.id} className="hover:bg-gray-50 transition-colors duration-150">
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <tr key={participant.id} className="hover:bg-gray-800/50 transition-colors duration-150">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">
                       {index + 1}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
+                      <div className="text-sm font-medium text-white">
                         {participant.first_name} {participant.last_name}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{participant.email}</div>
+                      <div className="text-sm text-gray-300">{participant.email}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{participant.phone}</div>
+                      <div className="text-sm text-gray-300">{participant.phone}</div>
                     </td>
                     <td className="px-6 py-4">
-                      <div className="text-sm text-gray-900 max-w-xs truncate" title={participant.college}>
+                      <div className="text-sm text-gray-300 max-w-xs truncate" title={participant.college}>
                         {participant.college}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-300">
                         Year {participant.year}
                       </div>
                       <div className="text-sm text-gray-500">
@@ -454,12 +471,12 @@ export default function AdminDashboard() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900 font-mono bg-gray-100 px-2 py-1 rounded">
+                      <div className="text-sm text-gray-300 font-mono bg-gray-800/50 px-2 py-1 rounded border border-gray-600">
                         {participant.usn}
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">
+                      <div className="text-sm text-gray-300">
                         {new Date(participant.created_at!).toLocaleDateString()}
                       </div>
                       <div className="text-xs text-gray-500">
@@ -477,15 +494,15 @@ export default function AdminDashboard() {
 
           {filteredParticipants.length === 0 && (
             <div className="text-center py-12">
-              <div className="text-gray-400 mb-4">
+              <div className="text-gray-500 mb-4">
                 <svg className="mx-auto h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
+              <h3 className="text-lg font-medium text-white mb-2">
                 {searchTerm ? 'No participants found' : 'No participants registered yet'}
               </h3>
-              <p className="text-gray-500">
+              <p className="text-gray-400">
                 {searchTerm 
                   ? 'Try adjusting your search terms or clear the search to see all participants.' 
                   : 'Participants will appear here once they start registering for the event.'
@@ -494,7 +511,7 @@ export default function AdminDashboard() {
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+                  className="mt-4 bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-200 shadow-lg hover:shadow-purple-500/25"
                 >
                   Clear search
                 </button>
@@ -504,8 +521,8 @@ export default function AdminDashboard() {
 
           {/* Pagination info */}
           {filteredParticipants.length > 0 && (
-            <div className="px-6 py-3 border-t border-gray-200 bg-gray-50">
-              <div className="flex justify-between items-center text-sm text-gray-700">
+            <div className="px-6 py-3 border-t border-gray-700/50 bg-gray-800/50">
+              <div className="flex justify-between items-center text-sm text-gray-300">
                 <div>
                   Showing {filteredParticipants.length} participant{filteredParticipants.length !== 1 ? 's' : ''}
                   {searchTerm && ` matching "${searchTerm}"`}

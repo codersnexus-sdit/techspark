@@ -35,16 +35,29 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-black to-purple-600/20"></div>
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+      
+      <div className="relative z-10 max-w-md w-full bg-gray-900/80 backdrop-blur-md rounded-2xl border border-gray-700/50 shadow-2xl p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Admin Login</h1>
-          <p className="text-gray-600 mt-2">Access the event management dashboard</p>
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <img 
+              src="/logo/nexus.svg" 
+              alt="Coders Nexus Logo" 
+              className="w-10 h-10 object-contain"
+            />
+            <span className="text-white text-xl font-bold">Coders Nexus</span>
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-2">Admin Login</h1>
+          <p className="text-gray-300">Access the event management dashboard</p>
         </div>
         
         <form onSubmit={handleLogin} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Admin Email
             </label>
             <input
@@ -53,12 +66,12 @@ export default function AdminLogin() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter admin email"
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2">
               Password
             </label>
             <input
@@ -67,14 +80,14 @@ export default function AdminLogin() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter admin password"
               required
-              className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+              className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 font-medium"
+            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 rounded-lg hover:from-purple-700 hover:to-purple-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 font-medium shadow-lg hover:shadow-purple-500/25"
           >
             {loading ? (
               <span className="flex items-center justify-center">
@@ -91,19 +104,19 @@ export default function AdminLogin() {
         </form>
 
         {/* Development credentials info */}
-        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-md">
-          <h4 className="text-sm font-medium text-blue-800 mb-2">Default Credentials:</h4>
-          <div className="text-sm text-blue-700 space-y-1">
+        <div className="mt-8 p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg backdrop-blur-sm">
+          <h4 className="text-sm font-medium text-purple-300 mb-2">Default Credentials:</h4>
+          <div className="text-sm text-purple-200 space-y-1">
             <p><strong>Email:</strong> admin@techevent.com</p>
             <p><strong>Password:</strong> admin123</p>
           </div>
-          <p className="text-xs text-blue-600 mt-2">
+          <p className="text-xs text-purple-400 mt-2">
             ⚠️ Change these credentials in production!
           </p>
         </div>
 
         <div className="mt-6 text-center">
-          <a href="/" className="text-sm text-blue-600 hover:text-blue-800">
+          <a href="/" className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200">
             ← Back to Event Page
           </a>
         </div>

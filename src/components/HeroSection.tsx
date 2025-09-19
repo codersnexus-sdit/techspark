@@ -6,7 +6,7 @@ import { Calendar, Users, Trophy, ArrowRight } from 'lucide-react'
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen bg-black text-white overflow-hidden">
+    <section className="relative min-h-screen bg-black text-white overflow-hidden pt-24 md:pt-28">
       <div className="absolute inset-0 w-full h-full">
         <SparklesCore
           id="tsparticlesfullpage"
@@ -31,15 +31,7 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.5 }}
             className="mb-12"
           >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="inline-flex items-center px-6 py-3 rounded-full bg-gradient-to-r from-purple-600/20 to-purple-800/20 border border-purple-500/30 mb-8 backdrop-blur-sm"
-            >
-              <div className="w-2 h-2 bg-purple-400 rounded-full mr-3 animate-pulse" />
-              <span className="text-purple-200 font-medium">October 19-21, 2024</span>
-            </motion.div>
+            
 
             <motion.h1 
               className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight"

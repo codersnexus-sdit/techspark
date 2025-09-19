@@ -62,15 +62,15 @@ export default function Navbar() {
         {/* Desktop Layout */}
         <div className="hidden lg:block">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="flex items-center justify-between h-20">
+            <div className="flex items-center justify-between h-24">
               
               {/* Logo Section */}
               <Link href="/" className="flex items-center space-x-3 group">
                 <div className="relative">
                   <img 
-                    src="/logo/nexus.svg" 
+                    src="/assets/logo/logo.svg" 
                     alt="Coders Nexus Logo" 
-                    className="w-10 h-10 object-contain transition-transform duration-300 group-hover:scale-110"
+                    className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-[#B4FF39] to-[#9929EA] opacity-0 group-hover:opacity-20 rounded-full transition-opacity duration-300"></div>
                 </div>
@@ -170,9 +170,9 @@ export default function Navbar() {
               <Link href="/" className="flex items-center space-x-2 group">
                 <div className="relative">
                   <img 
-                    src="/logo/nexus.svg" 
+                    src="/assets/logo/logo.svg" 
                     alt="Coders Nexus Logo" 
-                    className="w-8 h-8 object-contain transition-transform duration-300 group-hover:scale-110"
+                    className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -208,15 +208,24 @@ export default function Navbar() {
           
           {/* Menu Content */}
           <div className="fixed inset-0 z-50 flex items-center justify-center lg:hidden">
-            <div className="bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4">
+            <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4">
+
+              {/* Close Button (inside mobile menu) */}
+              <button
+                aria-label="Close menu"
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-4 right-4 text-gray-300 hover:text-white p-2 rounded-lg transition-all duration-300 bg-gray-800/60 border border-gray-700/50"
+              >
+                <X size={20} />
+              </button>
               
               {/* Mobile Menu Header */}
               <div className="text-center mb-8">
                 <div className="flex items-center justify-center space-x-2 mb-2">
                   <img 
-                    src="/logo/nexus.svg" 
+                    src="/assets/logo/logo.svg" 
                     alt="Coders Nexus Logo" 
-                    className="w-8 h-8 object-contain"
+                    className="w-12 h-12 object-contain"
                   />
                   <span className="text-white text-xl font-bold">Coders Nexus</span>
                 </div>

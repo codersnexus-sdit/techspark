@@ -298,25 +298,25 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="relative z-10 bg-gray-900/80 backdrop-blur-md border-b border-gray-700/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-3 sm:gap-0">
+            <div className="flex items-center space-x-2 sm:space-x-3">
               <img 
-                src="/logo/nexus.svg" 
+                src="/assets/logo/logo.svg" 
                 alt="Coders Nexus Logo" 
-                className="w-10 h-10 object-contain"
+                className="w-12 h-12 sm:w-16 sm:h-16 object-contain flex-shrink-0"
               />
-              <div>
-                <h1 className="text-3xl font-bold text-white">Admin Dashboard</h1>
-                <p className="text-gray-300 mt-1">Manage event registrations</p>
+              <div className="min-w-0">
+                <h1 className="text-lg sm:text-2xl font-bold text-white truncate">Admin Dashboard</h1>
+                <p className="text-gray-300 text-xs sm:text-sm truncate">Manage event registrations</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4">
-              <div className="text-sm text-gray-300">
+            <div className="flex items-center space-x-2 sm:space-x-4 w-full sm:w-auto justify-end">
+              <div className="text-xs sm:text-sm text-gray-300 hidden sm:block">
                 Welcome, Admin
               </div>
               <button
                 onClick={handleLogout}
-                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-medium shadow-lg hover:shadow-red-500/25"
+                className="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 sm:px-6 py-1.5 sm:py-2 rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-medium shadow-lg hover:shadow-red-500/25 text-sm sm:text-base whitespace-nowrap"
               >
                 Logout
               </button>

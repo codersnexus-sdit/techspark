@@ -208,7 +208,16 @@ export default function Navbar() {
           
           {/* Menu Content */}
           <div className="fixed inset-0 z-50 flex items-center justify-center lg:hidden">
-            <div className="bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4">
+            <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4">
+
+              {/* Close Button (inside mobile menu) */}
+              <button
+                aria-label="Close menu"
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute top-4 right-4 text-gray-300 hover:text-white p-2 rounded-lg transition-all duration-300 bg-gray-800/60 border border-gray-700/50"
+              >
+                <X size={20} />
+              </button>
               
               {/* Mobile Menu Header */}
               <div className="text-center mb-8">

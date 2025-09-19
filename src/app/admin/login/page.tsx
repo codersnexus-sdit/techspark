@@ -45,7 +45,7 @@ export default function AdminLogin() {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center space-x-3 mb-4">
             <img 
-              src="/assets/logo/nexus1.png" 
+              src="/assets/logo/logo.svg" 
               alt="Coders Nexus Logo" 
               className="w-10 h-10 object-contain"
             />
@@ -103,17 +103,7 @@ export default function AdminLogin() {
           </button>
         </form>
 
-        {/* Development credentials info */}
-        <div className="mt-8 p-4 bg-purple-900/20 border border-purple-500/30 rounded-lg backdrop-blur-sm">
-          <h4 className="text-sm font-medium text-purple-300 mb-2">Default Credentials:</h4>
-          <div className="text-sm text-purple-200 space-y-1">
-            <p><strong>Email:</strong> admin@techevent.com</p>
-            <p><strong>Password:</strong> admin123</p>
-          </div>
-          <p className="text-xs text-purple-400 mt-2">
-            ⚠️ Change these credentials in production!
-          </p>
-        </div>
+        
 
         <div className="mt-6 text-center">
           <a href="/" className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200">

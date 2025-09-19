@@ -1,5 +1,5 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 
@@ -63,34 +63,39 @@ const TimelineSection = () => {
     }
   ];
 
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
     <section className="relative min-h-screen bg-black text-white px-6 sm:px-12 md:px-20 lg:px-32 py-20">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900/30 to-black" />
       
-      {/* Animated Background Particles */}
-      <div className="absolute inset-0 opacity-10">
-        {[...Array(8)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-purple-500 rounded-full"
-            initial={{ 
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-            }}
-            animate={{
-              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
-              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
-            }}
-            transition={{
-              duration: 25 + Math.random() * 15,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "linear"
-            }}
-          />
-        ))}
-      </div>
+      {/* Animated Background Particles (client-only to avoid hydration mismatch) */}
+      {mounted && (
+        <div className="absolute inset-0 opacity-10">
+          {[...Array(8)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-purple-500 rounded-full"
+              initial={{ 
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+              }}
+              animate={{
+                x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+                y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
+              }}
+              transition={{
+                duration: 25 + Math.random() * 15,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "linear"
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="relative z-10 max-w-6xl mx-auto">
         {/* Header */}

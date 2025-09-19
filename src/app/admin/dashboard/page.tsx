@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { createClient } from '@/lib/supabase'
 import { Participant } from '@/types'
+import type { RealtimePostgresInsertPayload } from '@supabase/supabase-js'
 import * as XLSX from 'xlsx'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
@@ -27,7 +28,7 @@ export default function AdminDashboard() {
           schema: 'public',
           table: 'participants'
         },
-        (payload) => {
+        (payload: RealtimePostgresInsertPayload<Participant>) => {
           setParticipants(prev => [payload.new as Participant, ...prev])
           toast.success('New participant registered!')
         }

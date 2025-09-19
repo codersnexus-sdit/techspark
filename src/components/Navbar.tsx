@@ -72,8 +72,9 @@ export default function Navbar() {
                     onClick={() => scrollToSection(item.href)}
                     className="relative text-gray-300 hover:text-white transition-all duration-300 font-medium px-6 py-2 rounded-full group"
                   >
-                    <span className="relative z-10">{item.name}</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#B4FF39]/20 to-[#9929EA]/20 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100"></div>
+                    <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA] transition-all duration-300">
+                      {item.name}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -154,10 +155,12 @@ export default function Navbar() {
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="block text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl hover:bg-gray-800/50 group"
+                    className="block text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl group"
                   >
                     <div className="flex items-center justify-between">
-                      <span>{item.name}</span>
+                      <span className="group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA] transition-all duration-300">
+                        {item.name}
+                      </span>
                       <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0" />
                     </div>
                   </button>

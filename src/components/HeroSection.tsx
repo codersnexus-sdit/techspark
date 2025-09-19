@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function HeroSection() {
   return (
-    <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+    <section className="bg-gradient-to-r from-purple-600 to-purple-900 text-white py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           TechEvent 2024
@@ -10,10 +10,11 @@ export default function HeroSection() {
         <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
           Join us for an amazing technical event featuring workshops, competitions, and networking opportunities
         </p>
+
         <div className="space-x-4">
           <Link 
             href="/register" 
-            className="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
+            className="bg-white text-purple-700 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 inline-block"
           >
             Register Now
           </Link>

@@ -9,13 +9,16 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@hookform/resolvers": "^5.2.2",
+    "@react-three/fiber": "^9.3.0",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.57.4",
     "@types/uuid": "^10.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.15",
+    "gsap": "^3.13.0",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.544.0",
@@ -26,6 +29,7 @@
     "react-hot-toast": "^2.6.0",
     "react-to-print": "^3.1.1",
     "tailwind-merge": "^3.3.1",
+    "three": "^0.180.0",
     "uuid": "^13.0.0",
     "xlsx": "^0.18.5",
     "yup": "^1.7.0"

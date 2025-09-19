@@ -62,7 +62,6 @@ const TimelineSection = () => {
       color: "text-yellow-400"
     }
   ];
-
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
@@ -83,6 +82,7 @@ const TimelineSection = () => {
       return { x, y, tx, ty, d };
     });
   }, [isClient]);
+
 
   return (
     <section className="relative min-h-screen bg-black text-white px-4 sm:px-6 md:px-20 lg:px-32 py-16 md:py-20 overflow-hidden">

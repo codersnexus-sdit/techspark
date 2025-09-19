@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import { ShinyButton } from "@/components/ui/shiny-button";
@@ -7,6 +7,9 @@ import { ShinyButton } from "@/components/ui/shiny-button";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +33,23 @@ export default function Navbar() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
     setIsMenuOpen(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent, itemName: string) => {
+    if (navRef.current) {
+      const rect = navRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+    if (hoveredItem !== itemName) {
+      setHoveredItem(itemName);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredItem(null);
   };
 
   return (
@@ -64,15 +84,69 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              {/* Navigation Menu */}
-              <div className="flex items-center bg-gray-900/80 backdrop-blur-md rounded-full px-2 py-2 border border-gray-700/50">
+              {/* Navigation Menu with Torch Effect */}
+              <div 
+                ref={navRef}
+                className="relative flex items-center bg-gray-900/80 backdrop-blur-md rounded-full px-2 py-2 border border-gray-700/50 overflow-hidden"
+                onMouseLeave={handleMouseLeave}
+              >
+                {/* Torch/Light Effect */}
+                {hoveredItem && (
+                  <div
+                    className="absolute pointer-events-none"
+                    style={{
+                      left: mousePosition.x - 75,
+                      top: mousePosition.y - 75,
+                      width: '150px',
+                      height: '150px',
+                      background: `radial-gradient(circle, 
+                        rgba(185, 28, 255, 0.4) 0%, 
+                        rgba(153, 41, 234, 0.25) 30%, 
+                        rgba(180, 255, 57, 0.2) 50%, 
+                        transparent 70%
+                      )`,
+                      borderRadius: '50%',
+                      filter: 'blur(20px)',
+                      zIndex: 1,
+                      transition: 'opacity 50ms ease-out',
+                    }}
+                  />
+                )}
+                
+                {/* Secondary glow effect */}
+                {hoveredItem && (
+                  <div
+                    className="absolute pointer-events-none"
+                    style={{
+                      left: mousePosition.x - 100,
+                      top: mousePosition.y - 100,
+                      width: '200px',
+                      height: '200px',
+                      background: `radial-gradient(circle, 
+                        rgba(185, 28, 255, 0.15) 0%, 
+                        rgba(153, 41, 234, 0.1) 40%, 
+                        transparent 70%
+                      )`,
+                      borderRadius: '50%',
+                      filter: 'blur(30px)',
+                      zIndex: 0,
+                      transition: 'opacity 50ms ease-out',
+                    }}
+                  />
+                )}
+
                 {navItems.map((item) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="relative text-gray-300 hover:text-white transition-all duration-300 font-medium px-6 py-2 rounded-full group"
+                    onMouseMove={(e) => handleMouseMove(e, item.name)}
+                    className="relative text-gray-300 hover:text-white transition-all duration-300 font-medium px-6 py-2 rounded-full group z-10"
                   >
-                    <span className="relative z-10 group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA] transition-all duration-300">
+                    <span                     className={`relative z-10 transition-all duration-100 ${
+                      hoveredItem === item.name 
+                        ? 'text-white drop-shadow-[0_0_15px_rgba(180,255,57,0.9)]' 
+                        : 'group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA]'
+                    }`}>
                       {item.name}
                     </span>
                   </button>
@@ -149,16 +223,19 @@ export default function Navbar() {
                 <span className="text-gray-400 text-sm">SDIT Open Source Community</span>
               </div>
 
-              {/* Menu Items */}
+              {/* Menu Items with Mobile Torch Effect */}
               <div className="space-y-2 mb-8">
                 {navItems.map((item) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="block text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl group"
+                    className="block w-full text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl group relative overflow-hidden"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA] transition-all duration-300">
+                    {/* Mobile hover glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9929EA]/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-100%] group-hover:translate-x-[100%]"></div>
+                    
+                    <div className="flex items-center justify-between relative z-10">
+                      <span className="group-hover:drop-shadow-[0_0_8px_rgba(180,255,57,0.6)] group-hover:text-[#B4FF39] transition-all duration-300">
                         {item.name}
                       </span>
                       <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0" />

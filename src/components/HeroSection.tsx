@@ -44,7 +44,7 @@ export default function HeroSection() {
               </span>
               <br />
               <span className="text-white text-4xl md:text-6xl lg:text-7xl">
-                2024
+                2025
               </span>
             </motion.h1>
 

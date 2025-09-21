@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { SparklesCore } from '@/components/ui/sparkles'
 import { motion } from 'framer-motion'
-import { Calendar, Users, Trophy, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 
 export default function HeroSection() {
   return (
@@ -42,9 +42,6 @@ export default function HeroSection() {
                 TechSpark
               </span>
               <br />
-              <span className="text-white text-5xl md:text-7xl lg:text-8xl">
-                2025
-              </span>
             </motion.h1>
 
             <motion.p 
@@ -69,54 +66,10 @@ export default function HeroSection() {
                 Register Now
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              
-              <button className="group border-2 border-purple-500/50 text-white px-10 py-4 rounded-xl text-lg font-semibold hover:border-purple-400 hover:bg-purple-500/10 transition-all duration-300">
-                Learn More
-              </button>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Features Section - Moved below with more spacing */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.6 }}
-        >
-          <motion.div 
-            className="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:border-purple-500/30"
-            whileHover={{ scale: 1.05, y: -10 }}
-          >
-            <div className="text-purple-400 mb-4">
-              <Calendar className="w-8 h-8 mx-auto" />
-            </div>
-            <h3 className="text-xl font-semibold mb-3 text-white">Technical Workshops</h3>
-            <p className="text-gray-400">Learn cutting-edge technologies from industry experts and enhance your skills</p>
-          </motion.div>
-
-          <motion.div 
-            className="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:border-purple-500/30"
-            whileHover={{ scale: 1.05, y: -10 }}
-          >
-            <div className="text-purple-400 mb-4">
-              <Trophy className="w-8 h-8 mx-auto" />
-            </div>
-            <h3 className="text-xl font-semibold mb-3 text-white">Competitions</h3>
-            <p className="text-gray-400">Showcase your skills in exciting challenges and win amazing prizes</p>
-          </motion.div>
-
-          <motion.div 
-            className="group bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:border-purple-500/30"
-            whileHover={{ scale: 1.05, y: -10 }}
-          >
-            <div className="text-purple-400 mb-4">
-              <Users className="w-8 h-8 mx-auto" />
-            </div>
-            <h3 className="text-xl font-semibold mb-3 text-white">Networking</h3>
-            <p className="text-gray-400">Connect with like-minded developers, mentors, and industry professionals</p>
-          </motion.div>
-        </motion.div>
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-10" />

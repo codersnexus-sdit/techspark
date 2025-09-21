@@ -190,7 +190,7 @@ export default function Navbar() {
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="relative text-gray-300 hover:text-white p-2 rounded-lg transition-all duration-300 bg-gray-900/50 backdrop-blur-md border border-gray-700/50"
               >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                <Menu size={24} />
               </button>
             </div>
           </div>
@@ -243,20 +243,21 @@ export default function Navbar() {
                     {/* Mobile hover glow effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9929EA]/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-100%] group-hover:translate-x-[100%]"></div>
                     
-                    <div className="flex items-center justify-between relative z-10">
+                    <div className="flex items-center justify-center relative z-10">
                       <span className="group-hover:drop-shadow-[0_0_8px_rgba(180,255,57,0.6)] group-hover:text-[#B4FF39] transition-all duration-300">
                         {item.name}
                       </span>
-                      <ArrowRight size={16} className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0" />
                     </div>
                   </button>
                 ))}
               </div>
               
               {/* Mobile Register Button */}
-              <Link href="/register" onClick={() => setIsMenuOpen(false)}>
-                <ShinyButton>Register Now</ShinyButton>
-              </Link>
+              <div className="flex justify-center">
+                <Link href="/register" onClick={() => setIsMenuOpen(false)}>
+                  <ShinyButton>Register Now</ShinyButton>
+                </Link>
+              </div>
             </div>
           </div>
         </>

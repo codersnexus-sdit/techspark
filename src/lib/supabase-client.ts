@@ -1,5 +1,5 @@
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import type { RealtimeChannel } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 export const createClient = () => {
   // Check if environment variables are set
@@ -20,7 +20,7 @@ export const createClient = () => {
         on: () => ({ subscribe: () => ({ unsubscribe: () => {} }) }),
       }),
       removeChannel: () => {},
-    } as unknown as RealtimeChannel
+    } as unknown as SupabaseClient
   }
   
   return createClientComponentClient()

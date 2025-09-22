@@ -21,6 +21,12 @@ export default function AdminLayout({
         return
       }
 
+      // Redirect to login if visiting admin root
+      if (pathname === '/admin') {
+        router.push('/admin/login')
+        return
+      }
+
       // Check if admin is authenticated
       if (!isAdminAuthenticated()) {
         router.push('/admin/login')

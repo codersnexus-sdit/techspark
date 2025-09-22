@@ -57,7 +57,7 @@ export default function ThankYouPage() {
           className="text-xl text-gray-300 mb-8 leading-relaxed"
         >
           Your registration for <span className="text-purple-400 font-semibold">TechSpark 2025</span> has been successfully submitted. 
-          We're excited to have you join us for this amazing technical event!
+          We&apos;re excited to have you join us for this amazing technical event!
         </motion.p>
 
         {/* Event Details */}
@@ -94,7 +94,7 @@ export default function ThankYouPage() {
           transition={{ duration: 0.8, delay: 1.0 }}
           className="mb-8"
         >
-          <h3 className="text-xl font-semibold text-white mb-4">What's Next?</h3>
+          <h3 className="text-xl font-semibold text-white mb-4">What&apos;s Next?</h3>
           <p className="text-gray-400 leading-relaxed">
             You will receive a confirmation email shortly with further details about the event. 
             Keep an eye on your inbox for updates and event schedule.

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { validateAdminCredentials, setAdminAuthenticated } from '@/lib/adminAuth'
 import toast from 'react-hot-toast'
 
@@ -106,9 +107,9 @@ export default function AdminLogin() {
         
 
         <div className="mt-6 text-center">
-          <a href="/" className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200">
+          <Link href="/" className="text-sm text-purple-400 hover:text-purple-300 transition-colors duration-200">
             ← Back to Event Page
-          </a>
+          </Link>
         </div>
       </div>
     </div>

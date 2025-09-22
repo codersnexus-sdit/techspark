@@ -4,11 +4,13 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import { RegistrationFormData } from '@/types'
 
 export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
   const router = useRouter()
   const supabase = createClient()
 
@@ -46,8 +48,12 @@ export default function RegistrationForm() {
       }
 
       toast.success('Registration successful!')
-      reset()
-      router.push('/')
+      setIsSuccess(true)
+      
+      // Show success animation for 2 seconds then redirect
+      setTimeout(() => {
+        router.push('/thank-you')
+      }, 2000)
     } catch (error) {
       toast.error('Something went wrong. Please try again.')
     } finally {
@@ -56,7 +62,27 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 relative">
+      {/* Logo in top corner - outside container */}
+      <Link href="/" className="absolute top-8 left-8 z-10 group flex items-center space-x-3">
+        <div className="relative">
+          <img 
+            src="/assets/logo/logo.svg" 
+            alt="Coders Nexus Logo" 
+            className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 opacity-0 group-hover:opacity-30 rounded-full transition-opacity duration-300"></div>
+        </div>
+        <div className="flex flex-col">
+          <span className="text-white text-xl font-bold tracking-tight group-hover:text-purple-300 transition-colors duration-300">
+            Coders Nexus
+          </span>
+          <span className="text-gray-400 text-sm font-medium group-hover:text-purple-400 transition-colors duration-300">
+            SDIT Open Source Community
+          </span>
+        </div>
+      </Link>
+      
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-2xl bg-gray-900 rounded-2xl shadow-lg p-8 space-y-6 border border-gray-800"
@@ -74,7 +100,7 @@ export default function RegistrationForm() {
             <input
               {...register('firstName', { required: 'First name is required' })}
               className="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9929EA]"
-              placeholder="Shon"
+              placeholder="John"
             />
             {errors.firstName && (
               <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>
@@ -214,10 +240,16 @@ export default function RegistrationForm() {
         {/* Submit */}
         <button
           type="submit"
-          disabled={isSubmitting}
-          className="w-full bg-[#9929EA] text-white py-3 rounded-lg font-semibold text-lg shadow-md hover:bg-[#7a21bd] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isSubmitting || isSuccess}
+          className={`w-full py-3 rounded-lg font-semibold text-lg shadow-md transition-all duration-500 disabled:cursor-not-allowed ${
+            isSuccess 
+              ? 'bg-green-500 text-white animate-pulse scale-105' 
+              : isSubmitting
+              ? 'bg-[#7a21bd] text-white opacity-50'
+              : 'bg-[#9929EA] text-white hover:bg-[#7a21bd] hover:scale-105'
+          }`}
         >
-          {isSubmitting ? 'Registering...' : 'Register'}
+          {isSuccess ? '✓ Registration Successful!' : isSubmitting ? 'Registering...' : 'Register'}
         </button>
       </form>
     </div>

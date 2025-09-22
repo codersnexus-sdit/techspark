@@ -153,7 +153,7 @@ export default function AboutSection() {
           </motion.a>
 
           <motion.a
-            href="#"
+            href="register"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg border border-[#a855f7] text-white font-semibold text-lg hover:bg-[#a855f7]/10 transition"
             whileHover={{ scale: 1.05, borderColor: "#8b5cf6", backgroundColor: "rgba(168, 85, 247, 0.1)" }}
             whileTap={{ scale: 0.95 }}

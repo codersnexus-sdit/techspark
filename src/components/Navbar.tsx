@@ -72,7 +72,7 @@ export default function Navbar() {
                     alt="Coders Nexus Logo" 
                     className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#B4FF39] to-[#9929EA] opacity-0 group-hover:opacity-20 rounded-full transition-opacity duration-300"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 opacity-0 group-hover:opacity-30 rounded-full transition-opacity duration-300"></div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-white text-xl font-bold tracking-tight">
@@ -174,6 +174,7 @@ export default function Navbar() {
                     alt="Coders Nexus Logo" 
                     className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 opacity-0 group-hover:opacity-30 rounded-full transition-opacity duration-300"></div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-white text-lg font-bold tracking-tight">

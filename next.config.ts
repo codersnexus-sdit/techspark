@@ -1,15 +1,7 @@
 import type { NextConfig } from "next";
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-      allowedOrigins: ['*'],
-    },
-  },
-}
-
-module.exports = nextConfig
+const nextConfig: NextConfig = {
+  // Remove experimental serverActions to avoid invalid option warnings
+};
 
 export default nextConfig;

@@ -338,7 +338,7 @@ export default function AdminDashboard() {
           
           <div className="bg-gray-900/80 backdrop-blur-md p-6 rounded-xl border border-gray-700/50 shadow-lg">
             <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
-              Today's Registrations
+              Today&apos;s Registrations
             </h3>
             <p className="text-3xl font-bold text-green-400 mt-2">{todayRegistrations}</p>
             <p className="text-xs text-gray-500 mt-1">New registrations today</p>

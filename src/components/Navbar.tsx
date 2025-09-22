@@ -202,43 +202,44 @@ export default function Navbar() {
         <>
           {/* Backdrop */}
           <div
-            className="fixed inset-0 bg-black/90 backdrop-blur-md z-40 lg:hidden"
+            className="fixed inset-0 bg-black/90 backdrop-blur-md z-40 lg:hidden animate-in fade-in duration-300"
             onClick={() => setIsMenuOpen(false)}
           />
           
           {/* Menu Content */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center lg:hidden">
-            <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center lg:hidden animate-in fade-in duration-300">
+            <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500">
 
               {/* Close Button (inside mobile menu) */}
               <button
                 aria-label="Close menu"
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute top-4 right-4 text-gray-300 hover:text-white p-2 rounded-lg transition-all duration-300 bg-gray-800/60 border border-gray-700/50"
+                className="absolute top-4 right-4 text-gray-300 hover:text-white p-2 rounded-lg transition-all duration-300 bg-gray-800/60 border border-gray-700/50 animate-in fade-in slide-in-from-top-2 duration-500 delay-200"
               >
                 <X size={20} />
               </button>
               
               {/* Mobile Menu Header */}
-              <div className="text-center mb-8">
+              <div className="text-center mb-8 animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
                 <div className="flex items-center justify-center space-x-2 mb-2">
                   <img 
                     src="/assets/logo/logo.svg" 
                     alt="Coders Nexus Logo" 
-                    className="w-12 h-12 object-contain"
+                    className="w-12 h-12 object-contain animate-in zoom-in-95 duration-500 delay-300"
                   />
-                  <span className="text-white text-xl font-bold">Coders Nexus</span>
+                  <span className="text-white text-xl font-bold animate-in slide-in-from-left-4 duration-500 delay-400">Coders Nexus</span>
                 </div>
-                <span className="text-gray-400 text-sm">SDIT Open Source Community</span>
+                <span className="text-gray-400 text-sm animate-in fade-in slide-in-from-bottom-2 duration-500 delay-500">SDIT Open Source Community</span>
               </div>
 
               {/* Menu Items with Mobile Torch Effect */}
               <div className="space-y-2 mb-8">
-                {navItems.map((item) => (
+                {navItems.map((item, index) => (
                   <button
                     key={item.name}
                     onClick={() => scrollToSection(item.href)}
-                    className="block w-full text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl group relative overflow-hidden"
+                    className="block w-full text-gray-300 hover:text-white text-lg font-medium transition-all duration-300 py-3 px-6 rounded-xl group relative overflow-hidden animate-in fade-in slide-in-from-left-4 duration-500"
+                    style={{ animationDelay: `${600 + index * 100}ms` }}
                   >
                     {/* Mobile hover glow effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#9929EA]/10 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-[-100%] group-hover:translate-x-[100%]"></div>
@@ -253,7 +254,7 @@ export default function Navbar() {
               </div>
               
               {/* Mobile Register Button */}
-              <div className="flex justify-center">
+              <div className="flex justify-center animate-in fade-in slide-in-from-bottom-4 duration-500 delay-1000">
                 <Link href="/register" onClick={() => setIsMenuOpen(false)}>
                   <ShinyButton>Register Now</ShinyButton>
                 </Link>

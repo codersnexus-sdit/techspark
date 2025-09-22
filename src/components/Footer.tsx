@@ -105,7 +105,7 @@ const Footer = () => {
                         <li className="flex items-start justify-center md:justify-start text-center md:text-left">
                           <i className="hidden md:inline-block contact-icon fa-regular fa-location-dot mt-1 mr-0 md:mr-3 text-[#9929EA]"></i>
                           <Link 
-                            href="https://maps.app.goo.gl/YourMapLink" 
+                            href="https://maps.app.goo.gl/qRqni4NNwMibajKK9" 
                             target="_blank"
                             className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
                           >

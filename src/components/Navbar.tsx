@@ -181,7 +181,7 @@ export default function Navbar() {
                     Coders Nexus
                   </span>
                   <span className="text-gray-400 text-xs font-medium">
-                    SDIT OSC
+                    SDIT Open Source Community
                   </span>
                 </div>
               </Link>

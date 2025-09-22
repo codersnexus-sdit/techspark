@@ -126,8 +126,14 @@ const TimelineSection = () => {
 
         {/* Timeline */}
         <div className="relative">
-          {/* Central Timeline Line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 bg-gradient-to-b from-purple-500 via-purple-400 to-transparent"></div>
+          {/* Central Timeline Line (animates after heading) */}
+          <motion.div
+            className="hidden md:block absolute left-1/2 transform -translate-x-px h-full w-0.5 origin-top bg-gradient-to-b from-purple-500 via-purple-400 to-transparent"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: 'easeOut' }}
+            viewport={{ once: true }}
+          />
           
           <div className="space-y-12">
             {timelineEvents.map((event, index) => {

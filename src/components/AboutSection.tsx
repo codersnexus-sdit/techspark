@@ -106,21 +106,7 @@ export default function AboutSection() {
           >
             29th September
           </motion.span>{" "}
-          and is open exclusively for{" "}
-          <motion.span 
-            className="font-semibold"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            viewport={{ once: true }}
-            whileHover={{ 
-              scale: 1.1,
-              textShadow: "0 0 15px rgba(255, 255, 255, 0.4)",
-              transition: { duration: 0.2 }
-            }}
-          >
-            individual participants
-          </motion.span>. The
+          and is open to individual participants or teams of up to two members. The
           competition will begin with an aptitude and coding basics round,
           followed by a debugging challenge, and will conclude with a final
           coding showdown for the top performers. This structured format ensures

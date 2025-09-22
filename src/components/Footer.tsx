@@ -1,12 +1,9 @@
 import Link from "next/link";
 
 const githubLink = "https://github.com/codersnexus-sdit";
-const linkedinLink = "#";
+const linkedinLink = "https://www.linkedin.com/in/coders-nexus-722a28385/";
 const instagramLink = "https://instagram.com/coders-nexus";
-const facebookLink = "#";
-const twitterLink = "#";
 const youtubeLink = "#";
-const discordLink = "#";
 
 const communityGuidelines = "https://github.com/codersnexus-sdit";
 

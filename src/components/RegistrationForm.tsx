@@ -62,22 +62,22 @@ export default function RegistrationForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 relative">
+    <div className="min-h-screen flex items-center justify-center bg-gray-950 px-4 relative pt-20 md:pt-24 lg:pt-0">
       {/* Logo in top corner - outside container */}
-      <Link href="/" className="absolute top-8 left-8 z-10 group flex items-center space-x-3">
+      <Link href="/" className="absolute top-2 left-3 md:top-4 md:left-4 lg:top-8 lg:left-8 z-10 group flex items-center space-x-3">
         <div className="relative">
           <img 
             src="/assets/logo/logo.svg" 
             alt="Coders Nexus Logo" 
-            className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+            className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 opacity-0 group-hover:opacity-30 rounded-full transition-opacity duration-300"></div>
         </div>
         <div className="flex flex-col">
-          <span className="text-white text-xl font-bold tracking-tight group-hover:text-purple-300 transition-colors duration-300">
+          <span className="text-white text-base md:text-lg lg:text-xl font-bold tracking-tight group-hover:text-purple-300 transition-colors duration-300">
             Coders Nexus
           </span>
-          <span className="text-gray-400 text-sm font-medium group-hover:text-purple-400 transition-colors duration-300">
+          <span className="hidden lg:block text-gray-400 text-sm font-medium group-hover:text-purple-400 transition-colors duration-300">
             SDIT Open Source Community
           </span>
         </div>

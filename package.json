@@ -22,6 +22,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.15",
     "gsap": "^3.13.0",
+    "ogl": "^0.0.120",
     "jspdf": "^3.0.3",
     "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.544.0",

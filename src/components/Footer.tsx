@@ -24,21 +24,41 @@ const Footer = () => {
                       <img 
                         src="/assets/logo/coders-nexus1.svg" 
                         alt="Coders Nexus SDIT Logo" 
-                        className="logo-light w-full max-w-[180px] sm:max-w-[220px] md:max-w-[300px] lg:max-w-[420px] h-auto md:mx-0 mx-auto"
+                        className="logo-light w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[260px] h-auto md:mx-0 mx-auto"
                       />
                     </Link>
                   </div>
-                  <p className="text-gray-300 text-sm sm:text-base leading-relaxed mt-4 max-w-md text-center md:text-left whitespace-normal md:whitespace-nowrap">
-                    
-                  </p>
+                  <div className="mt-4 w-full max-w-md">
+                    <p className="text-gray-400 text-xs sm:text-sm mb-2 text-center md:text-left">Faculty Coordinators</p>
+                    <div className="grid grid-cols-2 gap-6 text-center md:text-left">
+                      <div>
+                        <p className="text-white font-semibold text-xs sm:text-sm">Nishmitha</p>
+                        <Link 
+                          href="tel:+919743081373"
+                          className="text-gray-300 hover:text-[#9929EA] text-xs sm:text-sm inline-block mt-1"
+                        >
+                          +91 97430 81373
+                        </Link>
+                      </div>
+                      <div>
+                        <p className="text-white font-semibold text-xs sm:text-sm">Thejas</p>
+                        <Link 
+                          href="tel:+918075773051"
+                          className="text-gray-300 hover:text-[#9929EA] text-xs sm:text-sm inline-block mt-1"
+                        >
+                          +91 80757 73051
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
               {/* Social Media Section */}
-              <div className="w-full">
-                <div className="rainbow-footer-widget text-center md:text-left">
+              <div className="w-full flex justify-center">
+                <div className="rainbow-footer-widget text-center">
                   <div className="widget-menu-bottom">
-                    <h4 className="text-white text-lg font-semibold mb-4 md:mb-6 title">Social Media</h4>
+                    <h4 className="text-white text-lg font-semibold mb-4 md:mb-6 title text-center">Social Media</h4>
                     <div className="inner">
                       <ul className="footer-link link-hover space-y-2 md:space-y-3">
                         <li>

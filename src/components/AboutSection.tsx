@@ -129,7 +129,7 @@ export default function AboutSection() {
             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(124, 58, 237, 0.3)" }}
             whileTap={{ scale: 0.95 }}
           >
-            Download Event Schedule
+            Download Event Brouchure
             <motion.div
               whileHover={{ x: 5 }}
               transition={{ duration: 0.2 }}

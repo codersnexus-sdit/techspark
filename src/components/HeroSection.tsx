@@ -66,7 +66,7 @@ export default function HeroSection() {
               {/* Line 1: Location */}
               <div className="flex items-center gap-2 sm:gap-3 text-white/90 text-base sm:text-lg md:text-2xl">
                 <MapPin className="w-5 h-5 md:w-6 md:h-6" />
-                <span className="font-mono"> Seminar Hall </span>
+                <span className="font-mono"> Seminar Hall - PG Building </span>
               </div>
               {/* Line 2: Date | Time */}
               <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 md:gap-x-8 text-white/90 text-base sm:text-lg md:text-2xl">

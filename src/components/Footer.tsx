@@ -29,22 +29,22 @@ const Footer = () => {
                     </Link>
                   </div>
                   <div className="mt-4 w-full max-w-md">
-                    <p className="text-gray-400 text-xs sm:text-sm mb-2 text-center md:text-left">Faculty Coordinators</p>
+                    <p className="text-gray-400 text-sm sm:text-base mb-2 text-center md:text-left">Faculty Coordinators</p>
                     <div className="grid grid-cols-2 gap-6 text-center md:text-left">
                       <div>
-                        <p className="text-white font-semibold text-xs sm:text-sm">Nishmitha</p>
+                        <p className="text-white font-semibold text-sm sm:text-base">Prof. Nishmitha M R</p>
                         <Link 
                           href="tel:+919743081373"
-                          className="text-gray-300 hover:text-[#9929EA] text-xs sm:text-sm inline-block mt-1"
+                          className="text-gray-300 hover:text-[#9929EA] text-sm sm:text-base inline-block mt-1"
                         >
                           +91 97430 81373
                         </Link>
                       </div>
                       <div>
-                        <p className="text-white font-semibold text-xs sm:text-sm">Thejas</p>
+                        <p className="text-white font-semibold text-sm sm:text-base">Prof. Thejas</p>
                         <Link 
                           href="tel:+918075773051"
-                          className="text-gray-300 hover:text-[#9929EA] text-xs sm:text-sm inline-block mt-1"
+                          className="text-gray-300 hover:text-[#9929EA] text-sm sm:text-base inline-block mt-1"
                         >
                           +91 80757 73051
                         </Link>
@@ -146,6 +146,15 @@ const Footer = () => {
                             className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
                           >
                             +91 63621 61570
+                          </Link>
+                        </li>
+                        <li className="flex items-start justify-center md:justify-start text-center md:text-left">
+                          <i className="hidden md:inline-block contact-icon fa-regular fa-phone mt-1 mr-0 md:mr-3 text-[#9929EA]"></i>
+                          <Link 
+                            href="tel:+916363910295"
+                            className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
+                          >
+                            +91 63639 10295
                           </Link>
                         </li>
                       </ul>

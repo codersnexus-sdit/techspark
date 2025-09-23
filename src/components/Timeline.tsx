@@ -7,14 +7,14 @@ const TimelineSection = () => {
   const timelineEvents = [
     {
       title: "Registration Opens",
-      date: "18 September, 2025",
+      date: "22 September, 2025",
       description: "Register Now",
       status: "completed",
       color: "text-purple-400"
     },
     {
       title: "Registration Closes",
-      date: "30 September, 2025", 
+      date: "29 September, 2025", 
       description: "Online registration will be closed and spot Registration will be available",
       status: "upcoming",
       color: "text-yellow-400"

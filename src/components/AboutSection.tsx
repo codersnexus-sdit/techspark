@@ -33,7 +33,7 @@ export default function AboutSection() {
             transition: { duration: 0.3 }
           }}
         >
-          Technical Event
+          Techspark
         </motion.p>
 
         {/* Heading */}
@@ -90,7 +90,7 @@ export default function AboutSection() {
               transition: { duration: 0.2 }
             }}
           >
-            Technical Event
+            Techspark
           </motion.span>{" "}
           will be held on <motion.span 
             className="font-semibold"

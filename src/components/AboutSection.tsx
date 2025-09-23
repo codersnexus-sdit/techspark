@@ -124,7 +124,9 @@ export default function AboutSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           <motion.a
-            href="#"
+            href="/assets/brochure/Brochure.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-4 rounded-lg bg-gradient-to-r from-[#7c3aed] to-[#9333ea] text-white font-semibold text-lg shadow-md hover:opacity-90 transition"
             whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(124, 58, 237, 0.3)" }}
             whileTap={{ scale: 0.95 }}

@@ -39,7 +39,7 @@ const Footer = () => {
                         </Link>
                       </div>
                       <div>
-                        <p className="text-white font-semibold text-sm sm:text-base">Prof. Thejas</p>
+                        <p className="text-white font-semibold text-sm sm:text-base">Prof. Thejash</p>
                         <Link 
                           href="tel:+918075773051"
                           className="text-gray-300 hover:text-[#9929EA] text-sm sm:text-base inline-block mt-1"

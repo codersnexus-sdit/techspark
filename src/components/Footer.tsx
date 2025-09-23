@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 const githubLink = "https://github.com/codersnexus-sdit";
-const linkedinLink = "https://www.linkedin.com/in/coders-nexus-722a28385/";
-const instagramLink = "https://instagram.com/coders-nexus";
+const linkedinLink = "https://www.linkedin.com/company/codersnexus-sdit/";
+const instagramLink = "https://instagram.com/coder_nexus";
 const youtubeLink = "#";
 
 const communityGuidelines = "https://github.com/codersnexus-sdit";
@@ -68,15 +68,6 @@ const Footer = () => {
                             className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
                           >
                             Instagram
-                          </Link>
-                        </li>
-                        <li>
-                          <Link 
-                            href={youtubeLink} 
-                            target="_blank"
-                            className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
-                          >
-                            Youtube
                           </Link>
                         </li>
                         <li>

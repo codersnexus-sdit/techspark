@@ -10,29 +10,29 @@ export const metadata = {
   icons: {
     icon: [
       {
-        url: '/assets/logo/faviconn/web-app-manifest-512x512.png',
+        url: '/assets/logo/newlogo.svg',
         sizes: '512x512',
         type: 'image/png'
       },
       {
-        url: '/assets/logo/faviconn/web-app-manifest-192x192.png',
+        url: '/assets/logo/newlogo.svg',
         sizes: '192x192',
         type: 'image/png'
       },
       {
-        url: '/assets/logo/faviconn/favicon-96x96.png',
+        url: '/assets/logo/newlogo.svg',
         sizes: '96x96',
         type: 'image/png'
       }
     ],
     apple: {
-      url: '/assets/logo/faviconn/apple-touch-icon.png',
+      url: '/assets/logo/newlogo.svg',
       sizes: '180x180',
       type: 'image/png'
     },
     shortcut: [
       {
-        url: '/assets/logo/faviconn/web-app-manifest-512x512.png',
+        url: '/assets/logo/newlogo.svg',
         sizes: '512x512',
         type: 'image/png'
       }

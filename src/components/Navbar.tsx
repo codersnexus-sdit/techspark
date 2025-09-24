@@ -84,7 +84,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              {/* Navigation Menu with Torch Effect */}
+              {/* Navigation Menu with Torch Effect  */}
               <div 
                 ref={navRef}
                 className="relative flex items-center bg-gray-900/80 backdrop-blur-md rounded-full px-2 py-2 border border-gray-700/50 overflow-hidden"

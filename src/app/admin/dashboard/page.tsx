@@ -200,7 +200,7 @@ export default function AdminDashboard() {
           <body>
             <div class="header">
               <h1>Event Participants Report</h1>
-              <p>TechEvent 2024 Registration Data</p>
+              <p>Techspark 2025 Registration Data</p>
             </div>
             <div class="info">
               <p><strong>Total Participants:</strong> ${participants.length}</p>
@@ -234,8 +234,7 @@ export default function AdminDashboard() {
               </tbody>
             </table>
             <div class="footer">
-              <p>This report was generated automatically from the TechEvent 2024 registration system.</p>
-              <p>For any queries, contact the event organizers.</p>
+              <p>This report was generated automatically from the Techspark 2025 registration system.</p>
             </div>
           </body>
         </html>

@@ -301,7 +301,7 @@ export default function AdminDashboard() {
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center py-4 gap-3 sm:gap-0">
             <div className="flex items-center space-x-2 sm:space-x-3">
               <img 
-                src="/assets/logo/logo.svg" 
+                src="/assets/logo/logo.png" 
                 alt="Coders Nexus Logo" 
                 className="w-12 h-12 sm:w-16 sm:h-16 object-contain flex-shrink-0"
               />

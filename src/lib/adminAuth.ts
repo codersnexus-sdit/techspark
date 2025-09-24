@@ -1,7 +1,7 @@
 // Simple admin authentication
 export const ADMIN_CREDENTIALS = {
     email: process.env.NEXT_PUBLIC_ADMIN_EMAIL || 'admin@techspark.com',
-    password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'adm1n$321'
+    password: process.env.NEXT_PUBLIC_ADMIN_PASSWORD || 'Adm1n$dit'
   }
   
   export const validateAdminCredentials = (email: string, password: string): boolean => {

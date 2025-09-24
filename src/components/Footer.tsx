@@ -86,15 +86,6 @@ const Footer = () => {
                             GitHub
                           </Link>
                         </li>
-                        <li>
-                          <Link 
-                            href={communityGuidelines} 
-                            target="_blank"
-                            className="text-gray-300 hover:text-[#9929EA] transition-colors duration-300"
-                          >
-                            Community Guidelines
-                          </Link>
-                        </li>
                       </ul>
                     </div>
                   </div>

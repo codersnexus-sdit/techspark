@@ -41,7 +41,7 @@ export const metadata = {
       {
         rel: 'icon',
         type: 'image/svg+xml',
-        url: '/assets/logo/faviconn/favicon.svg'
+        url: '/assets/logo/newlogo.svg'
       }
     ]
   }

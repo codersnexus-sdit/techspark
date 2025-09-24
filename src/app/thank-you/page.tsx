@@ -11,7 +11,7 @@ export default function ThankYouPage() {
       <Link href="/" className="absolute top-4 left-4 sm:top-6 sm:left-6 lg:top-8 lg:left-8 z-10 group flex items-center space-x-2 sm:space-x-3">
         <div className="relative">
           <img 
-            src="/assets/logo/logo.svg" 
+            src="/assets/logo/logo.png" 
             alt="Coders Nexus Logo" 
             className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
           />

@@ -10,29 +10,29 @@ export const metadata = {
   icons: {
     icon: [
       {
-        url: '/assets/logo/newlogo.svg',
+        url: '/assets/logo/logo.png',
         sizes: '512x512',
         type: 'image/png'
       },
       {
-        url: '/assets/logo/newlogo.svg',
+        url: '/assets/logo/logo.png',
         sizes: '192x192',
         type: 'image/png'
       },
       {
-        url: '/assets/logo/newlogo.svg',
+        url: '/assets/logo/logo.png',
         sizes: '96x96',
         type: 'image/png'
       }
     ],
     apple: {
-      url: '/assets/logo/newlogo.svg',
+      url: '/assets/logo/logo.png',
       sizes: '180x180',
       type: 'image/png'
     },
     shortcut: [
       {
-        url: '/assets/logo/newlogo.svg',
+        url: '/assets/logo/logo.png',
         sizes: '512x512',
         type: 'image/png'
       }
@@ -41,7 +41,7 @@ export const metadata = {
       {
         rel: 'icon',
         type: 'image/svg+xml',
-        url: '/assets/logo/newlogo.svg'
+        url: '/assets/logo/logo.png'
       }
     ]
   }

@@ -67,7 +67,7 @@ export default function RegistrationForm() {
       <Link href="/" className="absolute top-2 left-3 md:top-4 md:left-4 lg:top-8 lg:left-8 z-10 group flex items-center space-x-3">
         <div className="relative">
           <img 
-            src="/assets/logo/logo.svg" 
+            src="/assets/logo/logo.png" 
             alt="Coders Nexus Logo" 
             className="w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 object-contain transition-transform duration-300 group-hover:scale-110"
           />

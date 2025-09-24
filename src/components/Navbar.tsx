@@ -68,9 +68,9 @@ export default function Navbar() {
               <Link href="/" className="flex items-center space-x-3 group">
                 <div className="relative">
                   <img 
-                    src="/assets/logo/logo.svg" 
+                    src="/assets/logo/logo.png" 
                     alt="Coders Nexus Logo" 
-                    className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
+                    className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-100"
                   />
                   <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-purple-700 opacity-0 group-hover:opacity-30 rounded-full transition-opacity duration-300"></div>
                 </div>
@@ -84,7 +84,7 @@ export default function Navbar() {
                 </div>
               </Link>
 
-              {/* Navigation Menu with Torch Effect */}
+              {/* Navigation Menu with Torch Effect  */}
               <div 
                 ref={navRef}
                 className="relative flex items-center bg-gray-900/80 backdrop-blur-md rounded-full px-2 py-2 border border-gray-700/50 overflow-hidden"
@@ -170,7 +170,7 @@ export default function Navbar() {
               <Link href="/" className="flex items-center space-x-2 group">
                 <div className="relative">
                   <img 
-                    src="/assets/logo/logo.svg" 
+                    src="/assets/logo/logo.png" 
                     alt="Coders Nexus Logo" 
                     className="w-12 h-12 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
@@ -224,7 +224,7 @@ export default function Navbar() {
               <div className="text-center mb-8 animate-in fade-in slide-in-from-top-4 duration-500 delay-100">
                 <div className="flex items-center justify-center space-x-2 mb-2">
                   <img 
-                    src="/assets/logo/logo.svg" 
+                    src="/assets/logo/logo.png" 
                     alt="Coders Nexus Logo" 
                     className="w-12 h-12 object-contain animate-in zoom-in-95 duration-500 delay-300"
                   />

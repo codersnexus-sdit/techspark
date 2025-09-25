@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
-import { isAdminAuthenticated } from '@/lib/adminAuth'
+import { isAdminAuthenticated, verifyAdminAuth } from '@/lib/adminAuth'
 
 export default function AdminLayout({
   children,
@@ -14,7 +14,7 @@ export default function AdminLayout({
   const pathname = usePathname()
 
   useEffect(() => {
-    const checkAuth = () => {
+    const checkAuth = async () => {
       // Skip auth check for login page
       if (pathname === '/admin/login') {
         setLoading(false)
@@ -27,10 +27,23 @@ export default function AdminLayout({
         return
       }
 
-      // Check if admin is authenticated
-      if (!isAdminAuthenticated()) {
+      // Verify authentication with server
+      const authResult = await verifyAdminAuth()
+      
+      if (!authResult.authenticated) {
+        // Clear client-side session if server says not authenticated
+        if (typeof window !== 'undefined') {
+          sessionStorage.removeItem('adminAuthenticated')
+          sessionStorage.removeItem('adminEmail')
+        }
         router.push('/admin/login')
         return
+      }
+
+      // Update client-side session if authenticated
+      if (authResult.email && typeof window !== 'undefined') {
+        sessionStorage.setItem('adminAuthenticated', 'true')
+        sessionStorage.setItem('adminEmail', authResult.email)
       }
 
       setLoading(false)

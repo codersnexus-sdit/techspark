@@ -7,16 +7,25 @@ import type { RealtimePostgresInsertPayload } from '@supabase/supabase-js'
 import * as XLSX from 'xlsx'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
+import { logoutAdmin, clearAdminAuthentication } from '@/lib/adminAuth'
 
 export default function AdminDashboard() {
   const [participants, setParticipants] = useState<Participant[]>([])
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
+  const [stats, setStats] = useState({
+    total_participants: 0,
+    unique_colleges: 0,
+    unique_departments: 0,
+    today_registrations: 0,
+    week_registrations: 0
+  })
   const supabase = createClient()
   const router = useRouter()
 
   useEffect(() => {
     fetchParticipants()
+    fetchStats()
     
     // Subscribe to real-time changes
     const channel = supabase
@@ -30,6 +39,7 @@ export default function AdminDashboard() {
         },
         (payload: RealtimePostgresInsertPayload<Participant>) => {
           setParticipants(prev => [payload.new as Participant, ...prev])
+          setStats(prev => ({ ...prev, total_participants: prev.total_participants + 1 }))
           toast.success('New participant registered!')
         }
       )
@@ -42,13 +52,21 @@ export default function AdminDashboard() {
 
   const fetchParticipants = async () => {
     try {
-      const { data, error } = await supabase
-        .from('participants')
-        .select('*')
-        .order('created_at', { ascending: false })
-
-      if (error) throw error
-      setParticipants(data || [])
+      // Use secure API endpoint instead of direct Supabase query
+      const response = await fetch('/api/admin/participants')
+      
+      if (!response.ok) {
+        if (response.status === 401) {
+          // Unauthorized - redirect to login
+          clearAdminAuthentication()
+          router.push('/admin/login')
+          return
+        }
+        throw new Error('Failed to fetch participants')
+      }
+      
+      const data = await response.json()
+      setParticipants(data.participants || [])
     } catch (error) {
       console.error('Error fetching participants:', error)
       toast.error('Failed to fetch participants')
@@ -57,14 +75,38 @@ export default function AdminDashboard() {
     }
   }
 
-  // Updated handleLogout function to clear session storage
+  const fetchStats = async () => {
+    try {
+      const response = await fetch('/api/admin/stats')
+      
+      if (!response.ok) {
+        console.error('Failed to fetch stats')
+        return
+      }
+      
+      const data = await response.json()
+      setStats(data.stats || {
+        total_participants: 0,
+        unique_colleges: 0,
+        unique_departments: 0,
+        today_registrations: 0,
+        week_registrations: 0
+      })
+    } catch (error) {
+      console.error('Error fetching stats:', error)
+    }
+  }
+
+  // Updated handleLogout function to use secure API
   const handleLogout = async () => {
     try {
-      // Clear admin session from sessionStorage
-      sessionStorage.removeItem('adminAuthenticated')
-      sessionStorage.removeItem('adminEmail')
+      // Clear admin session from server
+      await logoutAdmin()
       
-      // Sign out from Supabase
+      // Clear client-side session storage
+      clearAdminAuthentication()
+      
+      // Sign out from Supabase (if needed)
       await supabase.auth.signOut()
       
       toast.success('Logged out successfully')
@@ -203,8 +245,8 @@ export default function AdminDashboard() {
               <p>Techspark 2025 Registration Data</p>
             </div>
             <div class="info">
-              <p><strong>Total Participants:</strong> ${participants.length}</p>
-              <p><strong>Unique Colleges:</strong> ${new Set(participants.map(p => p.college)).size}</p>
+              <p><strong>Total Participants:</strong> ${stats.total_participants}</p>
+              <p><strong>Unique Colleges:</strong> ${stats.unique_colleges}</p>
               <p><strong>Generated on:</strong> ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}</p>
             </div>
             <table>
@@ -267,10 +309,6 @@ export default function AdminDashboard() {
     p.usn.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
-  const todayRegistrations = participants.filter(p => 
-    new Date(p.created_at!).toDateString() === new Date().toDateString()
-  ).length
-
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-black relative overflow-hidden">
@@ -331,7 +369,7 @@ export default function AdminDashboard() {
             <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Total Participants
             </h3>
-            <p className="text-3xl font-bold text-blue-400 mt-2">{participants.length}</p>
+            <p className="text-3xl font-bold text-blue-400 mt-2">{stats.total_participants}</p>
             <p className="text-xs text-gray-500 mt-1">All time registrations</p>
           </div>
           
@@ -339,7 +377,7 @@ export default function AdminDashboard() {
             <h3 className="text-sm font-medium text-gray-400 uppercase tracking-wide">
               Today&apos;s Registrations
             </h3>
-            <p className="text-3xl font-bold text-green-400 mt-2">{todayRegistrations}</p>
+            <p className="text-3xl font-bold text-green-400 mt-2">{stats.today_registrations}</p>
             <p className="text-xs text-gray-500 mt-1">New registrations today</p>
           </div>
           
@@ -348,7 +386,7 @@ export default function AdminDashboard() {
               Unique Colleges
             </h3>
             <p className="text-3xl font-bold text-purple-400 mt-2">
-              {new Set(participants.map(p => p.college)).size}
+              {stats.unique_colleges}
             </p>
             <p className="text-xs text-gray-500 mt-1">Different institutions</p>
           </div>
@@ -360,7 +398,7 @@ export default function AdminDashboard() {
             <div className="flex space-x-2 mt-3">
               <button
                 onClick={exportToExcel}
-                disabled={participants.length === 0}
+                disabled={stats.total_participants === 0}
                 className="bg-gradient-to-r from-green-600 to-green-700 text-white px-3 py-1 rounded-lg text-sm hover:from-green-700 hover:to-green-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-green-500/25"
                 title="Download Excel file"
               >
@@ -368,7 +406,7 @@ export default function AdminDashboard() {
               </button>
               <button
                 onClick={exportToPDF}
-                disabled={participants.length === 0}
+                disabled={stats.total_participants === 0}
                 className="bg-gradient-to-r from-red-600 to-red-700 text-white px-3 py-1 rounded-lg text-sm hover:from-red-700 hover:to-red-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 shadow-lg hover:shadow-red-500/25"
                 title="Print/Save as PDF"
               >

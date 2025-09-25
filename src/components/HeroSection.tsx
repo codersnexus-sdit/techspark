@@ -41,21 +41,29 @@ export default function HeroSection() {
             transition={{ duration: 1, delay: 0.5 }}
             className="mb-16"
           >
-            <Shuffle
-              text="TechSpark"
-              className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white ${pressStart.className}`}
-              shuffleDirection="right"
-              duration={0.22}
-              animationMode="evenodd"
-              shuffleTimes={1}
-              ease="power3.out"
-              stagger={0.02}
-              threshold={0.1}
-              triggerOnce={true}
-              triggerOnHover={true}
-              respectReducedMotion={true}
-              tag="h1"
-            />
+            <div className="relative">
+              <Shuffle
+                text="TechSpark"
+                className={`text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-white drop-shadow-lg ${pressStart.className}`}
+                style={{ 
+                  color: '#ffffff !important', 
+                  textShadow: '0 0 20px rgba(255,255,255,0.5)',
+                  WebkitTextFillColor: '#ffffff',
+                  opacity: 1
+                }}
+                shuffleDirection="right"
+                duration={0.22}
+                animationMode="evenodd"
+                shuffleTimes={1}
+                ease="power3.out"
+                stagger={0.02}
+                threshold={0.1}
+                triggerOnce={true}
+                triggerOnHover={true}
+                respectReducedMotion={true}
+                tag="h1"
+              />
+            </div>
 
             <motion.div
               className="mb-10 sm:mb-12 flex flex-col items-center gap-2 sm:gap-3 md:gap-4 px-4"

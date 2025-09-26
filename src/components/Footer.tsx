@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const githubLink = "#";
 const linkedinLink = "https://www.linkedin.com/company/codersnexus-sdit/";
-const instagramLink = "https://instagram.com/coder_nexus";
+const instagramLink = "https://instagram.com/coders.nexus";
 const communityGuidelines = "https://github.com/codersnexus-sdit";
 
 const Footer = () => {

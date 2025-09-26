@@ -14,7 +14,7 @@ const TimelineSection = () => {
     },
     {
       title: "Registration Closes",
-      date: "29 September, 2025", 
+      date: "27 September, 2025", 
       description: "Online registration will be closed and spot Registration will be available",
       status: "upcoming",
       color: "text-yellow-400"

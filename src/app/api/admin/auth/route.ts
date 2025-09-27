@@ -3,28 +3,34 @@ import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
 
 // Server-side admin credentials (NOT exposed to client)
-// SECURITY: No fallback credentials for production safety
-if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
-  throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD environment variables are required')
+// SECURITY: Validate environment variables at runtime, not build time
+function getAdminCredentials() {
+  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+    throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD environment variables are required')
+  }
+  return {
+    email: process.env.ADMIN_EMAIL,
+    password: process.env.ADMIN_PASSWORD
+  }
 }
 
-if (!process.env.JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required')
+function getJWTSecret() {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is required')
+  }
+  return process.env.JWT_SECRET
 }
-
-const ADMIN_CREDENTIALS = {
-  email: process.env.ADMIN_EMAIL,
-  password: process.env.ADMIN_PASSWORD
-}
-
-const JWT_SECRET = process.env.JWT_SECRET
 
 export async function POST(request: NextRequest) {
   try {
     const { email, password } = await request.json()
+    
+    // Get credentials at runtime
+    const adminCredentials = getAdminCredentials()
+    const jwtSecret = getJWTSecret()
 
     // Validate credentials
-    if (email !== ADMIN_CREDENTIALS.email || password !== ADMIN_CREDENTIALS.password) {
+    if (email !== adminCredentials.email || password !== adminCredentials.password) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
         { status: 401 }
@@ -34,7 +40,7 @@ export async function POST(request: NextRequest) {
     // Create JWT token
     const token = jwt.sign(
       { email, role: 'admin' },
-      JWT_SECRET,
+      jwtSecret,
       { expiresIn: '24h' }
     )
 

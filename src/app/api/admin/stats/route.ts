@@ -2,12 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import jwt from 'jsonwebtoken'
 
-// SECURITY: Ensure JWT_SECRET is provided via environment variable
-if (!process.env.JWT_SECRET) {
-  throw new Error('JWT_SECRET environment variable is required')
+// SECURITY: Get JWT_SECRET at runtime to avoid build-time errors
+function getJWTSecret() {
+  if (!process.env.JWT_SECRET) {
+    throw new Error('JWT_SECRET environment variable is required')
+  }
+  return process.env.JWT_SECRET
 }
-
-const JWT_SECRET = process.env.JWT_SECRET
 
 // Create Supabase client with service role key for admin operations
 const supabase = createClient(
@@ -27,7 +28,8 @@ async function verifyAdminAuth(request: NextRequest) {
     const token = request.cookies.get('admin-token')?.value
     if (!token) return false
 
-    const decoded = jwt.verify(token, JWT_SECRET) as { email: string, role: string }
+    const jwtSecret = getJWTSecret()
+    const decoded = jwt.verify(token, jwtSecret) as { email: string, role: string }
     return decoded.role === 'admin'
   } catch {
     return false

@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { validateAdminCredentials, setAdminAuthenticated } from '@/lib/adminAuth'
+import { loginAdmin, setAdminAuthenticated } from '@/lib/adminAuth'
 import toast from 'react-hot-toast'
 
 export default function AdminLogin() {
@@ -17,17 +17,18 @@ export default function AdminLogin() {
     setLoading(true)
 
     try {
-      // Validate admin credentials
-      if (!validateAdminCredentials(email, password)) {
-        toast.error('Invalid admin credentials')
-        return
-      }
-
-      // Set admin session
-      setAdminAuthenticated(email)
+      // Use secure API authentication
+      const result = await loginAdmin(email, password)
       
-      toast.success('Login successful!')
-      router.push('/admin/dashboard')
+      if (result.success) {
+        // Set client-side session for UI purposes
+        setAdminAuthenticated(result.email!)
+        
+        toast.success('Login successful!')
+        router.push('/admin/dashboard')
+      } else {
+        toast.error(result.message)
+      }
     } catch (error) {
       toast.error('Login failed')
     } finally {

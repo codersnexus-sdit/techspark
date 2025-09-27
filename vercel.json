@@ -1,0 +1,9 @@
+{
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "regions": ["cle1"],
+  "framework": "nextjs"
+}

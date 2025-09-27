@@ -15,7 +15,7 @@ const TimelineSection = () => {
     {
       title: "Registration Closes",
       date: "27 September, 2025", 
-      description: "Registration will be closed on 27th",
+      description: "Registration will close on the 27th at 7 PM.",
       status: "upcoming",
       color: "text-yellow-400"
     },

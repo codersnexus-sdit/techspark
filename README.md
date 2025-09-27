@@ -20,12 +20,6 @@ Techspark is a cutting-edge event registration platform built for technical even
 - **Success Confirmation** with thank-you page and registration confirmation
 - **Mobile-First Design** optimized for all device sizes
 
-### 🛡️ Admin Management
-- **Secure Admin Dashboard** with authentication
-- **Real-Time Participant Tracking** with live updates
-- **Data Export Features** (Excel, PDF formats)
-- **Participant Search & Filtering**
-- **Registration Analytics** and reporting
 
 ### 🎨 Modern UI/UX
 - **Dark Theme Design** with gradient effects
@@ -33,6 +27,8 @@ Techspark is a cutting-edge event registration platform built for technical even
 - **3D Elements** with Three.js integration
 - **Particle Effects** for enhanced visual appeal
 - **Custom Components** with Tailwind CSS
+
+
 
 ## 🛠️ Tech Stack
 
@@ -47,12 +43,6 @@ Techspark is a cutting-edge event registration platform built for technical even
 - **Real-time subscriptions** for live data updates
 - **Authentication** and session management
 
-### Animations & UI
-- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready motion library
-- **[GSAP](https://greensock.com/gsap/)** - Professional animation library
-- **[Three.js](https://threejs.org/)** - 3D graphics library
-- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)** - React renderer for Three.js
-- **[Lucide React](https://lucide.dev/)** - Beautiful icon library
 
 ### Form Handling & Validation
 - **[React Hook Form](https://react-hook-form.com/)** - Performant forms with easy validation
@@ -94,9 +84,6 @@ Techspark is a cutting-edge event registration platform built for technical even
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
-4. **Database Setup**
-   - Create a `participants` table in your Supabase database
-   - Set up the required columns (see Database Schema below)
 
 5. **Run the development server**
    ```bash
@@ -115,106 +102,6 @@ Techspark is a cutting-edge event registration platform built for technical even
 7. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🌐 Deployment
-
-### Deploy to Vercel (Recommended)
-
-1. **Push to GitHub**
-   ```bash
-   git add .
-   git commit -m "Initial commit"
-   git push origin main
-   ```
-
-2. **Deploy to Vercel**
-   - Go to [vercel.com](https://vercel.com) and sign in with GitHub
-   - Click "New Project" and import your repository
-   - Configure environment variables in Vercel dashboard
-   - Deploy!
-
-3. **Environment Variables for Production**
-   Add these in Vercel dashboard under Settings > Environment Variables:
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
-   ADMIN_EMAIL=your_admin_email
-   ADMIN_PASSWORD=your_secure_password
-   JWT_SECRET=your_jwt_secret
-   ```
-
-### Deploy to Netlify
-
-1. **Build Configuration**
-   - Build command: `npm run build`
-   - Publish directory: `.next`
-
-2. **Environment Variables**
-   Add the same environment variables in Netlify dashboard
-
-### Other Hosting Platforms
-- **Railway**: Great for full-stack apps
-- **Render**: Free tier available
-- **Digital Ocean App Platform**: Professional hosting
-
-## 🗄️ Database Schema
-
-### Participants Table
-```sql
-CREATE TABLE participants (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  first_name VARCHAR(50) NOT NULL,
-  last_name VARCHAR(50) NOT NULL,
-  email VARCHAR(255) UNIQUE NOT NULL,
-  phone VARCHAR(15) NOT NULL,
-  college VARCHAR(255) NOT NULL,
-  year INTEGER NOT NULL,
-  department VARCHAR(100) NOT NULL,
-  usn VARCHAR(20) UNIQUE NOT NULL,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-```
-
-### Required Database Functions
-Run this in your Supabase SQL Editor:
-```sql
-CREATE OR REPLACE FUNCTION get_participant_stats()
-RETURNS JSON
-LANGUAGE plpgsql
-SECURITY DEFINER
-AS $$
-DECLARE
-  result JSON;
-BEGIN
-  SELECT json_build_object(
-    'total_participants', (SELECT COUNT(*) FROM participants),
-    'unique_colleges', (SELECT COUNT(DISTINCT college) FROM participants),
-    'unique_departments', (SELECT COUNT(DISTINCT department) FROM participants),
-    'today_registrations', (
-      SELECT COUNT(*) FROM participants 
-      WHERE DATE(created_at) = CURRENT_DATE
-    ),
-    'week_registrations', (
-      SELECT COUNT(*) FROM participants 
-      WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
-    )
-  ) INTO result;
-  
-  RETURN result;
-END;
-$$;
-
-GRANT EXECUTE ON FUNCTION get_participant_stats() TO service_role;
-```
-
-## 🔐 Admin Access
-
-- **URL**: `/admin/login`
-- **Default Credentials** (Change in production!):
-  - Email: `admin@techspark.com`
-  - Password: `Admin123SecurePass`
-
-## 🎯 Features Overview
 
 ### Registration System
 - ✅ Form validation with Yup schema
@@ -222,12 +109,6 @@ GRANT EXECUTE ON FUNCTION get_participant_stats() TO service_role;
 - ✅ Real-time feedback
 - ✅ Mobile-responsive design
 
-### Admin Dashboard
-- ✅ Secure JWT authentication
-- ✅ Real-time participant tracking
-- ✅ Export to Excel/PDF
-- ✅ Search and filtering
-- ✅ Registration analytics
 
 ### Security Features
 - ✅ Row Level Security (RLS) in Supabase
@@ -237,24 +118,6 @@ GRANT EXECUTE ON FUNCTION get_participant_stats() TO service_role;
 - ✅ Input validation and sanitization
 
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Team
-
-**Coders Nexus** - SDIT Open Source Community
-- Dedicated to building innovative solutions for the tech community
-- Fostering collaboration and learning in software development
-
-## 📞 Support
-
-For support and questions:
-- 📧 Email: [contact@codersnexus.com]
-- 🌐 Website: [codersnexus.com]
-- 💬 Discord: [Join our community]
-
----
 
 <div align="center">
   <p>Made with ❤️ by <strong>Coders Nexus</strong></p>

@@ -207,8 +207,8 @@ export default function RegisterPage() {
                 <span className="text-sm sm:text-base md:text-lg">Registration deadline has passed</span>
               </p>
               <p className="flex items-center justify-center space-x-2">
-                <span className="text-purple-400">•</span>
-                <span className="text-sm sm:text-base md:text-lg">Maximum capacity has been reached</span>
+                <span className="text-purple-400 flex-shrink-0">•</span>
+                <span className="text-sm sm:text-base md:text-lg whitespace-nowrap">Maximum capacity has been reached</span>
               </p>
               <p className="flex items-center justify-center space-x-2">
                 <span className="text-purple-400">•</span>

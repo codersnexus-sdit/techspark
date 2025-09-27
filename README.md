@@ -1,96 +1,134 @@
-## Techspark – Event Registration (Next.js + Supabase)
+# 🚀 Techspark - Technical Event Registration Platform
 
-Modern event registration app built with Next.js App Router, Tailwind CSS 4, and Supabase for data and realtime updates. Includes a public landing and a styled Admin Dashboard for viewing registrations with Excel/PDF export.
+<div align="center">
+  <img src="public/assets/images/Techspark.png" alt="Techspark Logo" width="300" height="200">
+  <h3>Event Registration Platform by Coders Nexus</h3>
+  <p>A modern, full-stack web application for seamless technical event registration and management</p>
+</div>
 
-### Requirements
-- Node 18+
-- npm
-- Supabase project (free tier is fine)
+---
 
-### 1) Install dependencies
-```bash
-npm install
-```
+## 🌟 Overview
 
-### 2) Environment variables
-Create a file named `.env.local` in the project root:
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+Techspark is a cutting-edge event registration platform built for technical events, hackathons, and conferences. It provides a seamless registration experience for participants and comprehensive management tools for administrators.
 
-Restart the dev server after changes to `.env.local`.
+## ✨ Key Features
 
-### 3) Database schema (Supabase SQL)
-Run in Supabase SQL Editor:
-```sql
-create extension if not exists pgcrypto;
+### 🎯 User Experience
+- **Responsive Landing Page** with hero section, about, timeline, and interactive map
+- **Smooth Registration Flow** with form validation and real-time feedback
+- **Success Confirmation** with thank-you page and registration confirmation
+- **Mobile-First Design** optimized for all device sizes
 
-create table if not exists public.participants (
-  id uuid primary key default gen_random_uuid(),
-  first_name text not null,
-  last_name text not null,
-  email text unique not null,
-  phone text unique not null,
-  college text not null,
-  year int not null,
-  department text not null,
-  usn text not null,
-  created_at timestamptz default now()
-);
+### 🛡️ Admin Management
+- **Secure Admin Dashboard** with authentication
+- **Real-Time Participant Tracking** with live updates
+- **Data Export Features** (Excel, PDF formats)
+- **Participant Search & Filtering**
+- **Registration Analytics** and reporting
 
-alter table public.participants enable row level security;
+### 🎨 Modern UI/UX
+- **Dark Theme Design** with gradient effects
+- **Interactive Animations** using Framer Motion and GSAP
+- **3D Elements** with Three.js integration
+- **Particle Effects** for enhanced visual appeal
+- **Custom Components** with Tailwind CSS
 
--- Dev policies (allow public read + insert). Harden for production.
-do $$
-begin
-  if not exists (select 1 from pg_policies where schemaname='public' and tablename='participants' and policyname='Anyone can register') then
-    create policy "Anyone can register" on public.participants for insert with check (true);
-  end if;
-  if not exists (select 1 from pg_policies where schemaname='public' and tablename='participants' and policyname='Public can view participants') then
-    create policy "Public can view participants" on public.participants for select to anon using (true);
-  end if;
-end $$;
+## 🛠️ Tech Stack
 
--- Realtime publication
-do $$
-begin
-  if not exists (
-    select 1 from pg_publication_tables
-    where pubname='supabase_realtime' and schemaname='public' and tablename='participants'
-  ) then
-    alter publication supabase_realtime add table public.participants;
-  end if;
-end $$;
+### Frontend
+- **[Next.js 15](https://nextjs.org/)** - React framework with App Router
+- **[React 19](https://react.dev/)** - Latest React version
+- **[TypeScript 5](https://www.typescriptlang.org/)** - Type-safe development
+- **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS framework
 
-alter table public.participants replica identity full;
-```
+### Backend & Database
+- **[Supabase](https://supabase.com/)** - Backend-as-a-Service with PostgreSQL
+- **Real-time subscriptions** for live data updates
+- **Authentication** and session management
 
-Then in Supabase Dashboard → Realtime:
-- Enable Realtime for schema `public` (or the `participants` table)
-- Ensure “Postgres Changes” is ON and includes INSERT
+### Animations & UI
+- **[Framer Motion](https://www.framer.com/motion/)** - Production-ready motion library
+- **[GSAP](https://greensock.com/gsap/)** - Professional animation library
+- **[Three.js](https://threejs.org/)** - 3D graphics library
+- **[React Three Fiber](https://docs.pmnd.rs/react-three-fiber/)** - React renderer for Three.js
+- **[Lucide React](https://lucide.dev/)** - Beautiful icon library
 
-### 4) Run locally
-```bash
-npm run dev
-```
-Open http://localhost:3000
+### Form Handling & Validation
+- **[React Hook Form](https://react-hook-form.com/)** - Performant forms with easy validation
+- **[Yup](https://github.com/jquense/yup)** - Schema validation
+- **[React Hot Toast](https://react-hot-toast.com/)** - Notification system
 
-### 5) Admin Dashboard
-- URL: `/admin/login`
-- Demo credentials in the UI (change for production)
-- Features: dark themed UI, live table updates, search, Excel/PDF export
+### Data Export
+- **[XLSX](https://sheetjs.com/)** - Excel file generation
+- **[jsPDF](https://github.com/parallax/jsPDF)** - PDF generation
+- **[React to Print](https://github.com/gregnb/react-to-print)** - Print functionality
 
-### Troubleshooting
-- Dashboard shows 0 values:
-  - Ensure `.env.local` is set and the server restarted
-  - Verify policies allow anon SELECT and INSERT (for dev)
-  - Realtime: table is in `supabase_realtime` publication and enabled in Dashboard
-  - Insert a test row in SQL editor to confirm
-- Missing envs warning in console means the app is using a temporary mock client; add env vars.
+## 🚀 Getting Started
 
-### Security notes
-- The provided RLS policies are permissive for development. For production, restrict INSERT to authenticated users or admin roles and remove anon broad access.
+### Prerequisites
+- **Node.js** (version 18 or higher)
+- **npm** or **yarn** package manager
+- **Supabase account** for database and authentication
 
-### License
-MIT
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd techspark
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Environment Setup**
+   - Create a `.env.local` file in the root directory
+   - Add your Supabase credentials:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+4. **Database Setup**
+   - Create a `participants` table in your Supabase database
+   - Set up the required columns (see Database Schema below)
+
+5. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+6. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👥 Team
+
+**Coders Nexus** - SDIT Open Source Community
+- Dedicated to building innovative solutions for the tech community
+- Fostering collaboration and learning in software development
+
+## 📞 Support
+
+For support and questions:
+- 📧 Email: [contact@codersnexus.com]
+- 🌐 Website: [codersnexus.com]
+- 💬 Discord: [Join our community]
+
+---
+
+<div align="center">
+  <p>Made with ❤️ by <strong>Coders Nexus</strong></p>
+  <p>Empowering the next generation of developers</p>
+</div>

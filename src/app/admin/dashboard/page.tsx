@@ -80,7 +80,17 @@ export default function AdminDashboard() {
       const response = await fetch('/api/admin/stats')
       
       if (!response.ok) {
-        console.error('Failed to fetch stats')
+        const errorData = await response.json().catch(() => ({}))
+        console.error('Failed to fetch stats:', response.status, errorData)
+        
+        if (response.status === 401) {
+          // Unauthorized - redirect to login
+          clearAdminAuthentication()
+          router.push('/admin/login')
+          return
+        }
+        
+        toast.error(`Failed to fetch stats: ${errorData.error || 'Unknown error'}`)
         return
       }
       
@@ -94,6 +104,7 @@ export default function AdminDashboard() {
       })
     } catch (error) {
       console.error('Error fetching stats:', error)
+      toast.error('Network error while fetching stats')
     }
   }
 

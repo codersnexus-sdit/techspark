@@ -105,8 +105,136 @@ Techspark is a cutting-edge event registration platform built for technical even
    yarn dev
    ```
 
-6. **Open your browser**
+6. **Run the development server**
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+7. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
+
+## 🌐 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. **Push to GitHub**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. **Deploy to Vercel**
+   - Go to [vercel.com](https://vercel.com) and sign in with GitHub
+   - Click "New Project" and import your repository
+   - Configure environment variables in Vercel dashboard
+   - Deploy!
+
+3. **Environment Variables for Production**
+   Add these in Vercel dashboard under Settings > Environment Variables:
+   ```
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+   ADMIN_EMAIL=your_admin_email
+   ADMIN_PASSWORD=your_secure_password
+   JWT_SECRET=your_jwt_secret
+   ```
+
+### Deploy to Netlify
+
+1. **Build Configuration**
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+
+2. **Environment Variables**
+   Add the same environment variables in Netlify dashboard
+
+### Other Hosting Platforms
+- **Railway**: Great for full-stack apps
+- **Render**: Free tier available
+- **Digital Ocean App Platform**: Professional hosting
+
+## 🗄️ Database Schema
+
+### Participants Table
+```sql
+CREATE TABLE participants (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  first_name VARCHAR(50) NOT NULL,
+  last_name VARCHAR(50) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  phone VARCHAR(15) NOT NULL,
+  college VARCHAR(255) NOT NULL,
+  year INTEGER NOT NULL,
+  department VARCHAR(100) NOT NULL,
+  usn VARCHAR(20) UNIQUE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+```
+
+### Required Database Functions
+Run this in your Supabase SQL Editor:
+```sql
+CREATE OR REPLACE FUNCTION get_participant_stats()
+RETURNS JSON
+LANGUAGE plpgsql
+SECURITY DEFINER
+AS $$
+DECLARE
+  result JSON;
+BEGIN
+  SELECT json_build_object(
+    'total_participants', (SELECT COUNT(*) FROM participants),
+    'unique_colleges', (SELECT COUNT(DISTINCT college) FROM participants),
+    'unique_departments', (SELECT COUNT(DISTINCT department) FROM participants),
+    'today_registrations', (
+      SELECT COUNT(*) FROM participants 
+      WHERE DATE(created_at) = CURRENT_DATE
+    ),
+    'week_registrations', (
+      SELECT COUNT(*) FROM participants 
+      WHERE created_at >= CURRENT_DATE - INTERVAL '7 days'
+    )
+  ) INTO result;
+  
+  RETURN result;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION get_participant_stats() TO service_role;
+```
+
+## 🔐 Admin Access
+
+- **URL**: `/admin/login`
+- **Default Credentials** (Change in production!):
+  - Email: `admin@techspark.com`
+  - Password: `Admin123SecurePass`
+
+## 🎯 Features Overview
+
+### Registration System
+- ✅ Form validation with Yup schema
+- ✅ Duplicate prevention
+- ✅ Real-time feedback
+- ✅ Mobile-responsive design
+
+### Admin Dashboard
+- ✅ Secure JWT authentication
+- ✅ Real-time participant tracking
+- ✅ Export to Excel/PDF
+- ✅ Search and filtering
+- ✅ Registration analytics
+
+### Security Features
+- ✅ Row Level Security (RLS) in Supabase
+- ✅ HTTP-only cookies for admin sessions
+- ✅ Environment variable protection
+- ✅ API route protection
+- ✅ Input validation and sanitization
 
 
 ## 📝 License

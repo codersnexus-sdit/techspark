@@ -10,17 +10,26 @@ function getJWTSecret() {
   return process.env.JWT_SECRET
 }
 
-// Create Supabase client with service role key for admin operations
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false
-    }
+// Create Supabase client at runtime to avoid build-time errors
+function getSupabaseServiceClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+  
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error('NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables are required')
   }
-)
+  
+  return createClient(
+    supabaseUrl,
+    supabaseServiceKey,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false
+      }
+    }
+  )
+}
 
 // Verify admin authentication
 async function verifyAdminAuth(request: NextRequest) {
@@ -47,6 +56,7 @@ export async function GET(request: NextRequest) {
     }
 
     // Try to get statistics using the secure function first
+    const supabase = getSupabaseServiceClient()
     const { data: statsData, error: statsError } = await supabase
       .rpc('get_participant_stats')
 

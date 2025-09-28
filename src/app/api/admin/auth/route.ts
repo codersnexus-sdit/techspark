@@ -1,6 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 import jwt from 'jsonwebtoken'
+import { adminAuthLimiter } from '@/lib/rateLimit'
+
+// Get client IP for rate limiting
+function getClientIP(request: NextRequest): string {
+  const forwarded = request.headers.get('x-forwarded-for')
+  const realIP = request.headers.get('x-real-ip')
+  return forwarded?.split(',')[0] || realIP || 'unknown'
+}
 
 // Server-side admin credentials (NOT exposed to client)
 // SECURITY: Validate environment variables at runtime, not build time
@@ -27,7 +35,24 @@ function getJWTSecret() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Rate limiting check
+    const clientIP = getClientIP(request)
+    if (!adminAuthLimiter.isAllowed(clientIP)) {
+      return NextResponse.json(
+        { error: 'Too many login attempts. Please try again later.' },
+        { status: 429 }
+      )
+    }
+
     const { email, password } = await request.json()
+    
+    // Input validation
+    if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
+      return NextResponse.json(
+        { error: 'Invalid input format' },
+        { status: 400 }
+      )
+    }
     
     // Get credentials at runtime
     const adminCredentials = getAdminCredentials()

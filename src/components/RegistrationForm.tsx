@@ -8,6 +8,20 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase'
 import { RegistrationFormData } from '@/types'
 
+// Input sanitization helper
+const sanitizeInput = (input: string): string => {
+  return input.trim().replace(/[<>"'&]/g, match => {
+    const entities: { [key: string]: string } = {
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;',
+      '&': '&amp;'
+    }
+    return entities[match] || match
+  })
+}
+
 export default function RegistrationForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
@@ -25,18 +39,21 @@ export default function RegistrationForm() {
     setIsSubmitting(true)
 
     try {
+      // Sanitize all input data
+      const sanitizedData = {
+        first_name: sanitizeInput(data.firstName),
+        last_name: sanitizeInput(data.lastName),
+        email: sanitizeInput(data.email.toLowerCase()),
+        phone: sanitizeInput(data.phone),
+        college: sanitizeInput(data.college),
+        year: data.year,
+        department: sanitizeInput(data.department),
+        usn: sanitizeInput(data.usn.toUpperCase())
+      }
+
       const { error } = await supabase
         .from('participants')
-        .insert([{
-          first_name: data.firstName,
-          last_name: data.lastName,
-          email: data.email,
-          phone: data.phone,
-          college: data.college,
-          year: data.year,
-          department: data.department,
-          usn: data.usn
-        }])
+        .insert([sanitizedData])
 
       if (error) {
         if (error.code === '23505') {

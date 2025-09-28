@@ -173,6 +173,13 @@ export default function AdminDashboard() {
     }
   }
 
+  // HTML escape function for security
+  const escapeHtml = (text: string): string => {
+    const div = document.createElement('div')
+    div.textContent = text
+    return div.innerHTML
+  }
+
   const exportToPDF = () => {
     if (participants.length === 0) {
       toast.error('No participants to export')

@@ -5,20 +5,24 @@ import jwt from 'jsonwebtoken'
 // Server-side admin credentials (NOT exposed to client)
 // SECURITY: Validate environment variables at runtime, not build time
 function getAdminCredentials() {
-  if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+  const email = process.env.ADMIN_EMAIL
+  const password = process.env.ADMIN_PASSWORD
+  
+  if (!email || !password) {
     throw new Error('ADMIN_EMAIL and ADMIN_PASSWORD environment variables are required')
   }
-  return {
-    email: process.env.ADMIN_EMAIL,
-    password: process.env.ADMIN_PASSWORD
-  }
+  
+  return { email, password }
 }
 
 function getJWTSecret() {
-  if (!process.env.JWT_SECRET) {
+  const secret = process.env.JWT_SECRET
+  
+  if (!secret) {
     throw new Error('JWT_SECRET environment variable is required')
   }
-  return process.env.JWT_SECRET
+  
+  return secret
 }
 
 export async function POST(request: NextRequest) {

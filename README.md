@@ -1,4 +1,4 @@
-# Techspark - Technical Event Registration Platform
+# Techspark - Technical Event
 
 <div align="center">
   <img src="public/assets/images/Techspark.png" alt="Techspark Logo" width="800" height="400" />

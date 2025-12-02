@@ -62,10 +62,32 @@ const TimelineSection = () => {
       color: "text-yellow-400"
     }
   ];
+  
   const [isClient, setIsClient] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
 
   useEffect(() => {
     setIsClient(true);
+    
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Generate deterministic particle positions only on client to avoid hydration mismatch
@@ -81,7 +103,7 @@ const TimelineSection = () => {
       const d = 25 + Math.random() * 15;
       return { x, y, tx, ty, d };
     });
-  }, [isClient]);
+  }, [isClient, windowSize]); // Add windowSize as dependency
 
 
   return (

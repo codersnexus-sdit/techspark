@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowRight, MapPin, Calendar, Clock } from 'lucide-react';
@@ -9,11 +10,36 @@ const pressStart = Press_Start_2P({ weight: '400', subsets: ['latin'] });
 import GradientBlinds from '@/components/ui/GradientBlinds';
 
 export default function HeroSection() {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <section className="relative min-h-screen bg-black text-white overflow-hidden">
       {/* GradientBlinds Background - full page */}
       <div className="absolute inset-0 w-full h-full z-0">
         <GradientBlinds
+          key={windowSize.width} // Add key to force re-render on resize
           gradientColors={['#FF9FFC', '#5227FF']}
           angle={45}
           noise={0.25}

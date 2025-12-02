@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 const githubLink = "https://github.com/codersnexus-sdit";
@@ -6,6 +7,30 @@ const instagramLink = "https://instagram.com/coders.nexus";
 const communityGuidelines = "https://github.com/codersnexus-sdit";
 
 const Footer = () => {
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
+
+  useEffect(() => {
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <div className="bg-black xl:px-10 md:px-4 lg:px-20 font-jetbrainsMono">
       <footer className="body-font tracking-wider">
@@ -20,6 +45,7 @@ const Footer = () => {
                   <div className="logo w-full flex justify-center md:justify-start">
                     <Link href="/" className="inline-block">
                       <img 
+                        key={windowSize.width} // Add key to force re-render on resize
                         src="/assets/logo/coders-nexus1.svg" 
                         alt="Coders Nexus SDIT Logo" 
                         className="logo-light w-full max-w-[140px] sm:max-w-[180px] md:max-w-[220px] lg:max-w-[260px] h-auto md:mx-0 mx-auto"

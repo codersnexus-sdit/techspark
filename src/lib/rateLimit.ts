@@ -47,14 +47,12 @@ class RateLimit {
 }
 
 // Rate limiters for different endpoints
-export const adminAuthLimiter = new RateLimit(15 * 60 * 1000, 5) // 5 attempts per 15 minutes
 export const registrationLimiter = new RateLimit(60 * 1000, 10) // 10 registrations per minute
 export const generalLimiter = new RateLimit(15 * 60 * 1000, 100) // 100 requests per 15 minutes
 
 // Clean up expired entries every 5 minutes
 if (typeof window === 'undefined') {
   setInterval(() => {
-    adminAuthLimiter.cleanup()
     registrationLimiter.cleanup()
     generalLimiter.cleanup()
   }, 5 * 60 * 1000)

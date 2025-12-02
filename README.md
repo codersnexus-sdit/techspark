@@ -9,7 +9,7 @@
 </h1>
 
 <p align="center">
-  <strong>A modern, full-stack web application for seamless technical event registration and comprehensive management tools for administrators.</strong>
+  <strong>A modern, full-stack web application for seamless technical event registration.</strong>
 </p>
 
 
@@ -65,5 +65,3 @@
   <img src="https://github.com/harshisalian.png" width="100" style="border-radius: 50%;" alt="Harshisalian"/>
 </a>
 </a>
-
-

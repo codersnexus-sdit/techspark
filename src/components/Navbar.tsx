@@ -9,14 +9,40 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [windowSize, setWindowSize] = useState({
+    width: typeof window !== 'undefined' ? window.innerWidth : 0,
+    height: typeof window !== 'undefined' ? window.innerHeight : 0,
+  });
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
+    
+    // Handler to call on window resize
+    const handleResize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+      
+      // Close mobile menu on resize for better UX
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   const navItems = [
@@ -142,7 +168,7 @@ export default function Navbar() {
                     onMouseMove={(e) => handleMouseMove(e, item.name)}
                     className="relative text-gray-300 hover:text-white transition-all duration-300 font-medium px-6 py-2 rounded-full group z-10"
                   >
-                    <span                     className={`relative z-10 transition-all duration-100 ${
+                    <span className={`relative z-10 transition-all duration-100 ${
                       hoveredItem === item.name 
                         ? 'text-white drop-shadow-[0_0_15px_rgba(180,255,57,0.9)]' 
                         : 'group-hover:drop-shadow-[0_0_8px_rgba(153,41,234,0.6)] group-hover:text-[#9929EA]'
@@ -210,7 +236,6 @@ export default function Navbar() {
           {/* Menu Content */}
           <div className="fixed inset-0 z-50 flex items-center justify-center lg:hidden animate-in fade-in duration-300">
             <div className="relative bg-gray-900/95 backdrop-blur-lg rounded-2xl p-8 border border-gray-700/50 shadow-2xl max-w-sm w-full mx-4 animate-in zoom-in-95 slide-in-from-bottom-4 duration-500">
-
               {/* Close Button (inside mobile menu) */}
               <button
                 aria-label="Close menu"

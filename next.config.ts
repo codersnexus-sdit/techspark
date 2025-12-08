@@ -2,9 +2,6 @@
  * Security-hardened Next.js configuration with security headers
  */
 const nextConfig = {
-	eslint: {
-		ignoreDuringBuilds: true,
-	},
 	// Security headers for protection against common attacks
 	async headers() {
 		return [

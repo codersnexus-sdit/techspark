@@ -5,5 +5,7 @@
     }
   },
   "regions": ["cle1"],
-  "framework": "nextjs"
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next"
 }
